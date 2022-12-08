@@ -10,8 +10,8 @@
   ],
   "portDisclaimer": [""],
   "portEnvDoNotPrompt": [],
-  "portVersion": ["2.5.T20"],
-  "configVersion": ["2.5.T20"],
+  "portVersion": ["2.5.T30"],
+  "configVersion": ["2.5.T30"],
   "autoLoginConfig": [
     {
       "userName": "",
