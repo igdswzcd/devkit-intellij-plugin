@@ -16,7 +16,7 @@
 
 package com.huawei.kunpeng.hyper.tuner.common.constant.enums;
 
-import com.huawei.kunpeng.hyper.tuner.webview.tuning.pageeditor.IDELoginEditor;
+import com.huawei.kunpeng.hyper.tuner.webview.tuning.pageeditor.*;
 import com.huawei.kunpeng.intellij.js2java.webview.pageditor.WebFileEditor;
 
 import com.intellij.openapi.vfs.VirtualFile;
@@ -45,6 +45,73 @@ public enum PageType {
         @Override
         public Optional<WebFileEditor> getWebFileEditor(@NotNull VirtualFile file) {
             return Optional.of(new IDELoginEditor(file));
+        }
+    },
+
+    /**
+     * 免费试用
+     */
+    FREE_TRIAL("free_trial"){
+        @Override
+        public Optional<WebFileEditor> getWebFileEditor(@NotNull VirtualFile file) {
+            return Optional.of(new FreeTrialEditor(file));
+        }
+    },
+
+    DEPLOY_SERVER("deploy_server"){
+        @Override
+        public Optional<WebFileEditor> getWebFileEditor(@NotNull VirtualFile file) {
+            return Optional.of(new DeployServerEditor(file));
+        }
+    },
+
+    /**
+     * 卸载工具
+     */
+    UNINSTALL_HYPER_TUNER("uninstall_hyper_tuner") {
+        @Override
+        public Optional<WebFileEditor> getWebFileEditor(@NotNull VirtualFile file) {
+            return Optional.of(new UninstallEditor(file));
+        }
+    },
+
+    /**
+     * 升级服务器
+     */
+    UPGRADE_SERVER("upgrade_server"){
+        @Override
+        public Optional<WebFileEditor> getWebFileEditor(@NotNull VirtualFile file) {
+            return Optional.of(new UpgradeServerEditor(file));
+        }
+    },
+
+    /**
+     * 配置服务器页面
+     */
+     CONFIGURE_SERVER("configure_server") {
+        @Override
+        public Optional<WebFileEditor> getWebFileEditor(@NotNull VirtualFile file) {
+            return Optional.of(new ConfigureServerEditor(file));
+        }
+    },
+
+    /**
+     * 配置指引页面
+     */
+    CONFIGURE_GUIDE("configure_guide") {
+        @Override
+        public Optional<WebFileEditor> getWebFileEditor(@NotNull VirtualFile file) {
+            return Optional.of(new ConfigGuideEditor(file));
+        }
+    },
+
+    /**
+     * 错误指示页面
+     */
+    ERROR_INSTRUCTION("error_instruction") {
+        @Override
+        public Optional<WebFileEditor> getWebFileEditor(@NotNull VirtualFile file) {
+            return Optional.of(new ErrorInstructionEditor(file));
         }
     };
 

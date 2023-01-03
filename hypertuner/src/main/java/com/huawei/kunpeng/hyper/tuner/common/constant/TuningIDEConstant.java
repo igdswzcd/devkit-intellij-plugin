@@ -55,23 +55,49 @@ public class TuningIDEConstant<T> extends IDEConstant {
     public static final String TUNING_NGINX_PATH = "nginx";
 
     /**
-     * tuning插件webview页面地址
+     * 工具名称
      */
-    public static final String TUNING_WEB_VIEW_INDEX_HTML = "index.html";
+    public static final String SYS = "sys";
 
     /**
-     * 代理html文件地址
+     * 工具名称
      */
-    public static final String WEB_VIEW_INDEX_HTML = "/webview/index.html";
+    public static final String JAVA = "java";
+
+    /**
+     * tuning插件登录页面webview页面地址
+     */
+    public static final String TUNING_LOGIN_WEB_VIEW_INDEX_HTML = "/webview/index.html";
+
+    /**
+     * tuning插件静态webview代理html文件地址
+     */
+    public static final String WEB_VIEW_INDEX_HTML = "/webview/tuning/sys/index.html";
 
     /**
      * nginx 资源包地址
      */
     public static final String NGINX_PLUGIN_NAME = "/nginx/nginx-1.18.0.zip";
 
+    /**
+     * nginx mac资源包地址
+     */
+    public static final String NGINX_MAC_PLUGIN_NAME = "/nginx/nginx-mac.zip";
+
 
     /**
      * 插件名称
      */
     public static final String TUNING_NAME = "Kunpeng-DevKit-IDE-hyper-tuner-plugin";
+
+
+    /**
+     * tuning页面包地址
+     */
+    public static final String TUNING_PLUGIN_NAME= "/webview/tuning.zip";
+
+    /**
+     * url文件urlConfig.json路径
+     */
+    public static final String URL_CONFIG_PATH = "/assets/urlConfig.json";
 }

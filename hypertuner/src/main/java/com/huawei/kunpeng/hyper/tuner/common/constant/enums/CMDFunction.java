@@ -28,12 +28,30 @@ import com.huawei.kunpeng.intellij.js2java.webview.handler.FunctionManager;
 public enum CMDFunction {
     NULL("null", null),
     GET_DATA("getData", FunctionManager.getFunctionHandler(CommonHandler.class)),
+    OPEN_NEW_PAGE("openNewPage", FunctionManager.getFunctionHandler(CommonHandler.class)),
     OPEN_HYPERLINKS("openHyperlinks", FunctionManager.getFunctionHandler(CommonHandler.class)),
     DOWNLOAD_BASE64_PNG("downloadBase64Png", FunctionManager.getFunctionHandler(CommonHandler.class)),
     DOWNLOAD_FILE_BY_BLOB("downloadFileByBlob", FunctionManager.getFunctionHandler(CommonHandler.class)),
     DOWNLOAD_FILE_BY_JSON("downloadFileByJson", FunctionManager.getFunctionHandler(CommonHandler.class)),
     DOWNLOAD_JAVA_OPER_LOG("downloadJavaOperLog", FunctionManager.getFunctionHandler(CommonHandler.class)),
-    DOWNLOAD_CERTIFICATE("downloadCertificate", FunctionManager.getFunctionHandler(CommonHandler.class));
+    DOWNLOAD_CERTIFICATE("downloadCertificate", FunctionManager.getFunctionHandler(CommonHandler.class)),
+    READ_URL_CONFIG("readUrlConfig", FunctionManager.getFunctionHandler(CommonHandler.class)),
+    CLOSE_PANEL("closePanel", FunctionManager.getFunctionHandler(CommonHandler.class)),
+    READ_FINGER("readFinger", FunctionManager.getFunctionHandler(CommonHandler.class)),
+    SAVE_FINGER("saveFinger", FunctionManager.getFunctionHandler(CommonHandler.class)),
+    CHECK_CONN("checkConn", FunctionManager.getFunctionHandler(CommonHandler.class)),
+    SHOW_INFO_BOX("showInfoBox", FunctionManager.getFunctionHandler(CommonHandler.class)),
+    READ_CONFIG("readConfig", FunctionManager.getFunctionHandler(CommonHandler.class)),
+    SAVE_CONFIG("saveConfig", FunctionManager.getFunctionHandler(CommonHandler.class)),
+    OPEN_URL_IN_BROWSER("openUrlInBrowser", FunctionManager.getFunctionHandler(CommonHandler.class)),
+    UPGRADE("upgrade", FunctionManager.getFunctionHandler(CommonHandler.class)),
+    HIDE_TERMINAL("hideTerminal", FunctionManager.getFunctionHandler(CommonHandler.class)),
+    LOGIN_SUCCESS("loginSuccess", FunctionManager.getFunctionHandler(CommonHandler.class)),
+    INSTALL("install", FunctionManager.getFunctionHandler(CommonHandler.class)),
+    UNINSTALL("uninstall", FunctionManager.getFunctionHandler(CommonHandler.class)),
+    CLEAN_CONFIG("cleanConfig", FunctionManager.getFunctionHandler(CommonHandler.class)),
+    CLOSE_ALL_PANEL("closeAllPanel", FunctionManager.getFunctionHandler(CommonHandler.class)),
+    UPLOAD_PRIVATE_KEY("uploadPrivateKey", FunctionManager.getFunctionHandler(CommonHandler.class));
 
     private final String functionName;
 

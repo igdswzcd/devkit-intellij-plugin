@@ -17,9 +17,9 @@
 package com.huawei.kunpeng.intellij.ui.panel;
 
 import com.huawei.kunpeng.intellij.common.i18n.CommonI18NServer;
+import com.huawei.kunpeng.intellij.ui.dialog.AboutDialog;
 
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 /**
  * The class BaseAboutPanel
@@ -33,11 +33,6 @@ public class BaseAboutPanel {
     private JPanel mainPanel;
 
     /**
-     * 边框
-     */
-    private JLabel borderLabel;
-
-    /**
      * 版本号
      */
     private JLabel versionLabel;
@@ -45,12 +40,13 @@ public class BaseAboutPanel {
     /**
      * 发行时间
      */
-    private JLabel releaseLabel;
+    private JLabel serverVersionLabel;
 
     /**
      * 版权
      */
     private JLabel copyRightLabel;
+    private JLabel imgLabel;
 
     /**
      * 版本号
@@ -60,11 +56,14 @@ public class BaseAboutPanel {
     /**
      * 发布时间
      */
-    private String productReleaseTime;
+    private String productServerVersion;
 
-    public BaseAboutPanel(String productVersion, String productReleaseTime) {
+    private static final String PATH = "/assets/img/common/icon_info.png";
+
+    public BaseAboutPanel(String productVersion, String productServerVersion) {
         this.productVersion = productVersion;
-        this.productReleaseTime = productReleaseTime;
+        this.productServerVersion = productServerVersion;
+        this.imgLabel.setIcon(new ImageIcon(AboutDialog.class.getResource(PATH)));
     }
 
     /**
@@ -73,9 +72,11 @@ public class BaseAboutPanel {
      * @return JPanel
      */
     public JPanel getComponent() {
-        borderLabel.setText(CommonI18NServer.toLocale("common_about_separator"));
         versionLabel.setText(productVersion);
-        releaseLabel.setText(productReleaseTime);
+        if(productServerVersion==null){
+            serverVersionLabel.setVisible(false);
+        }
+        serverVersionLabel.setText(productServerVersion);
         copyRightLabel.setText(CommonI18NServer.toLocale("common_about_product_copyright", "©"));
         return mainPanel;
     }

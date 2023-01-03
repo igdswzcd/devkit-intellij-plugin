@@ -402,13 +402,14 @@ public abstract class AbstractWebView {
             for (String str : list) {
                 str = Matcher.quoteReplacement(str);
                 if (list.size() == 1) {
-                    indexHtml = indexHtml.replaceFirst("top\\.navigatorPage",
-                            "top\\.navigatorPage = " + str);
+                    System.out.println("list size is 1!!!");
+                    indexHtml = indexHtml.replaceFirst("self\\.navigatorPage",
+                            "self\\.navigatorPage = " + str);
                     break;
                 }
                 if (i == 0) {
-                    indexHtml = indexHtml.replaceFirst("top\\.navigatorPage",
-                            "top\\.navigatorPage = " + str + "IntellIJStr");
+                    indexHtml = indexHtml.replaceFirst("self\\.navigatorPage",
+                            "self\\.navigatorPage = " + str + "IntellIJStr");
                     i++;
                 } else {
                     indexHtml = indexHtml.replace("IntellIJStr", str + "IntellIJStr");
@@ -450,8 +451,8 @@ public abstract class AbstractWebView {
         AtomicBoolean status = new AtomicBoolean(true);
         return StreamSupport.stream(Splitter.on("\n").split(indexHtml).spliterator(), false)
                 .map(lineStr -> {
-                    if (status.get() && lineStr.contains("top\\.navigatorPage")) {
-                        String newLineStr = lineStr.replaceFirst("top\\.navigatorPage = ",
+                    if (status.get() && lineStr.contains("self\\.navigatorPage")) {
+                        String newLineStr = lineStr.replaceFirst("self\\.navigatorPage = ",
                                 new Gson().toJson(navigatorPage));
                         status.set(false);
                         return newLineStr;
@@ -473,7 +474,7 @@ public abstract class AbstractWebView {
         while (true) {
             if (str.length() > 10000) {
                 list.add(str.substring(0, 10000));
-                str = str.substring(10000, str.length());
+                str = str.substring(10000);
             } else {
                 list.add(str);
                 break;

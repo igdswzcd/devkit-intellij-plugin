@@ -19,18 +19,14 @@ package com.huawei.kunpeng.hyper.tuner.common.constant;
 import static com.huawei.kunpeng.intellij.common.enums.IDEPluginStatus.IDE_STATUS_SERVER_CONFIG;
 
 import com.huawei.kunpeng.hyper.tuner.common.utils.TuningCommonUtil;
-import com.huawei.kunpeng.hyper.tuner.toolview.dialog.impl.wrap.TuningServerConfigWrapDialog;
-import com.huawei.kunpeng.hyper.tuner.toolview.panel.impl.TuningServerConfigPanel;
 import com.huawei.kunpeng.intellij.common.IDEContext;
 import com.huawei.kunpeng.intellij.common.constant.IDEConstant;
 import com.huawei.kunpeng.intellij.common.enums.BaseCacheVal;
 import com.huawei.kunpeng.intellij.common.enums.IDEPluginStatus;
 import com.huawei.kunpeng.intellij.common.util.CommonUtil;
 import com.huawei.kunpeng.intellij.common.util.StringUtil;
-import com.huawei.kunpeng.intellij.ui.panel.IDEBasePanel;
 
 import com.intellij.openapi.application.PathManager;
-import com.intellij.openapi.ui.DialogWrapper;
 
 import java.util.HashMap;
 import java.util.Optional;
@@ -77,13 +73,15 @@ public class TuningIDEContext<T> extends IDEContext {
 
         if (value < IDE_STATUS_SERVER_CONFIG.value()
                 && StringUtil.stringIsEmpty(TuningCommonUtil.readCurIpFromConfig())) {
-            IDEBasePanel panel = new TuningServerConfigPanel(null);
-
-            TuningServerConfigWrapDialog serverConfigDialog =
-                    new TuningServerConfigWrapDialog(TuningUserManageConstant.CONFIG_TITLE, panel);
-            serverConfigDialog.displayPanel();
-            final int exitCode = serverConfigDialog.getExitCode();
-            return exitCode != DialogWrapper.CANCEL_EXIT_CODE;
+            System.out.println("not config yet!");
+            // TODO 重新修改！！
+//            IDEBasePanel panel = new TuningServerConfigPanel(null);
+//
+//            TuningServerConfigWrapDialog serverConfigDialog =
+//                    new TuningServerConfigWrapDialog(TuningUserManageConstant.CONFIG_TITLE, panel);
+//            serverConfigDialog.displayPanel();
+//            final int exitCode = serverConfigDialog.getExitCode();
+//            return exitCode != DialogWrapper.CANCEL_EXIT_CODE;
         }
         return true;
     }
@@ -122,13 +120,21 @@ public class TuningIDEContext<T> extends IDEContext {
             setValueForGlobalContext(TuningIDEConstant.TOOL_NAME_TUNING, BaseCacheVal.TUNING_WEB_VIEW_INDEX.vaLue(),
                     PathManager.getPluginsPath() + IDEConstant.PATH_SEPARATOR +
                             TuningIDEConstant.TUNING_NAME +
-                            TuningIDEConstant.PATH_SEPARATOR +
-                            TuningIDEConstant.TUNING_WEB_VIEW_PATH +
-                            TuningIDEConstant.PATH_SEPARATOR +
-                            TuningIDEConstant.TUNING_WEB_VIEW_INDEX_HTML);
+                            TuningIDEConstant.WEB_VIEW_INDEX_HTML);
         }
         return getValueFromGlobalContext(TuningIDEConstant.TOOL_NAME_TUNING,
                 BaseCacheVal.TUNING_WEB_VIEW_INDEX.vaLue());
+    }
+
+    /**
+     * 获取tuning插件login页面index入口
+     * @return
+     */
+    public static String getLoginWebViewIndex() {
+        String indexPath = PathManager.getPluginsPath() + IDEConstant.PATH_SEPARATOR +
+                TuningIDEConstant.TUNING_NAME +
+                TuningIDEConstant.TUNING_LOGIN_WEB_VIEW_INDEX_HTML;
+        return indexPath;
     }
 
 }

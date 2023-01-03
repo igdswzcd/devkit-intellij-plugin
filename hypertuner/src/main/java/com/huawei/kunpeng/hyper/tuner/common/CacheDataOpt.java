@@ -24,6 +24,7 @@ import com.huawei.kunpeng.intellij.common.BaseCacheDataOpt;
 import com.huawei.kunpeng.intellij.common.IDEContext;
 import com.huawei.kunpeng.intellij.common.enums.BaseCacheVal;
 import com.huawei.kunpeng.intellij.common.enums.ConfigProperty;
+import com.huawei.kunpeng.intellij.common.enums.SystemOS;
 import com.huawei.kunpeng.intellij.common.log.Logger;
 import com.huawei.kunpeng.intellij.common.util.CommonUtil;
 import com.huawei.kunpeng.intellij.common.util.FileUtil;
@@ -69,6 +70,10 @@ public class CacheDataOpt extends BaseCacheDataOpt {
         // 获取系统信息及动态库的环境path
         loadingSystemOS();
 
+        // 输出系统OS
+        SystemOS systemOS = IDEContext.getValueFromGlobalContext(null, BaseCacheVal.SYSTEM_OS.vaLue());
+        Logger.info("=====current OS is {}=====", systemOS);
+
         // 加载config配置信息
         Logger.info("=====start loading config.properties=====");
         Map config = FileUtil.ConfigParser.parseJsonConfigFromFile(TuningIDEConstant.CONFIG_PATH);
@@ -86,27 +91,52 @@ public class CacheDataOpt extends BaseCacheDataOpt {
                         configDef.get(BaseCacheVal.PORT.vaLue()));
             }
         }
-        Logger.info("=====start loading webview=====");
+
+        // 解压缩nginx安装包，需根据OS类型执行不同方法
+        Logger.info("=====start loading nginx=====");
+        if (systemOS.equals(SystemOS.WINDOWS)) {
+            Optional<File> optionalFile2 = FileUtil.getFile(
+                    CommonUtil.getPluginInstalledPath() + TuningIDEConstant.NGINX_PLUGIN_NAME,
+                    true);
+            optionalFile2.ifPresent(file -> FileUtil.readAndWriterFileFromJar(file, TuningIDEConstant.NGINX_PLUGIN_NAME,
+                    true));
+
+            Logger.info("=====start unzip nginx=====");
+            FileUtil.unzipFile(CommonUtil.getPluginInstalledPath() + TuningIDEConstant.NGINX_PLUGIN_NAME,
+                    CommonUtil.getPluginInstalledPathFile(TuningIDEConstant.TUNING_NGINX_PATH));
+        } else if (systemOS.equals(SystemOS.MAC)) {
+            Logger.info("start loading nginx in mac system");
+            Optional<File> optionalFile2 = FileUtil.getFile(
+                    CommonUtil.getPluginInstalledPath() + TuningIDEConstant.NGINX_MAC_PLUGIN_NAME,
+                    true);
+            optionalFile2.ifPresent(file -> FileUtil.readAndWriterFileFromJar(file,
+                    TuningIDEConstant.NGINX_MAC_PLUGIN_NAME, true));
+            Logger.info("=====start unzip nginx=====");
+            FileUtil.unzipFile(CommonUtil.getPluginInstalledPath() + TuningIDEConstant.NGINX_MAC_PLUGIN_NAME,
+                    CommonUtil.getPluginInstalledPathFile(TuningIDEConstant.TUNING_NGINX_PATH));
+        }
+
+        // 加载tuning插件登录页面index.html
+        Logger.info("=====start loading login index webview=====");
         Optional<File> optionalFile = FileUtil.getFile(
-                CommonUtil.getPluginInstalledPath() + TuningIDEConstant.WEB_VIEW_INDEX_HTML, true);
-        optionalFile.ifPresent(file -> FileUtil.readAndWriterFileFromJar(file, TuningIDEConstant.WEB_VIEW_INDEX_HTML,
+                CommonUtil.getPluginInstalledPath() + TuningIDEConstant.TUNING_LOGIN_WEB_VIEW_INDEX_HTML, true);
+        optionalFile.ifPresent(file -> FileUtil.readAndWriterFileFromJar(file, TuningIDEConstant.TUNING_LOGIN_WEB_VIEW_INDEX_HTML,
+                true));
+        // 加载tuning插件静态webview页面资源包
+        Logger.info("=====start loading tuning.zip=====");
+        Optional<File> newOptionalFile = FileUtil.getFile(
+                CommonUtil.getPluginInstalledPath() + TuningIDEConstant.TUNING_PLUGIN_NAME, true);
+        newOptionalFile.ifPresent(file -> FileUtil.readAndWriterFileFromJar(file, TuningIDEConstant.TUNING_PLUGIN_NAME,
                 true));
 
-        Logger.info("=====start loading nginx");
-        Optional<File> optionalFile2 = FileUtil.getFile(
-                CommonUtil.getPluginInstalledPath() + TuningIDEConstant.NGINX_PLUGIN_NAME, true);
-        optionalFile2.ifPresent(file -> FileUtil.readAndWriterFileFromJar(file, TuningIDEConstant.NGINX_PLUGIN_NAME,
-                true));
-
-        Logger.info("=====start unzip nginx");
-        FileUtil.unzipFile(CommonUtil.getPluginInstalledPath() + TuningIDEConstant.NGINX_PLUGIN_NAME,
-                CommonUtil.getPluginInstalledPathFile(TuningIDEConstant.TUNING_NGINX_PATH));
-
+        FileUtil.unzipFile(CommonUtil.getPluginInstalledPath() + TuningIDEConstant.TUNING_PLUGIN_NAME,
+                CommonUtil.getPluginInstalledPathFile(TuningIDEConstant.TUNING_WEB_VIEW_PATH));
         // 加载index页面到缓存，并替换base路径
         Logger.info("=====start loading index=====");
         String indexHtml = FileUtil.readFileContent(TuningIDEContext.getWebViewIndex());
         indexHtml = indexHtml.replaceFirst("base href=\"\\./\"", "base href=\"\"");
-        IDEContext.setValueForGlobalContext(null, TuningIDEConstant.TUNING_WEB_VIEW_INDEX_HTML, indexHtml);
-        Logger.info("=====loading GlobalCache successful=====");
+        IDEContext.setValueForGlobalContext(null, TuningIDEConstant.WEB_VIEW_INDEX_HTML, indexHtml);
+        String loginIndexHtml = FileUtil.readFileContent(TuningIDEContext.getLoginWebViewIndex());
+        IDEContext.setValueForGlobalContext(null, TuningIDEConstant.TUNING_LOGIN_WEB_VIEW_INDEX_HTML, loginIndexHtml);
     }
 }

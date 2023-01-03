@@ -19,12 +19,11 @@ package com.huawei.kunpeng.hyper.tuner.toolview.dialog.impl.wrap;
 import com.huawei.kunpeng.hyper.tuner.action.uninstall.TuningUninstallAction;
 import com.huawei.kunpeng.hyper.tuner.common.constant.TuningIDEConstant;
 import com.huawei.kunpeng.hyper.tuner.common.constant.TuningIDEContext;
-import com.huawei.kunpeng.hyper.tuner.toolview.panel.impl.LeftTreeConfigPanel;
+import com.huawei.kunpeng.hyper.tuner.toolview.panel.impl.TuningServerConfigPanel;
 import com.huawei.kunpeng.intellij.common.UserInfoContext;
 import com.huawei.kunpeng.intellij.common.enums.IDEPluginStatus;
 import com.huawei.kunpeng.intellij.common.log.Logger;
 import com.huawei.kunpeng.intellij.common.util.CommonUtil;
-import com.huawei.kunpeng.intellij.common.util.ConfigUtils;
 import com.huawei.kunpeng.intellij.ui.dialog.wrap.UninstallWrapDialog;
 import com.huawei.kunpeng.intellij.ui.panel.IDEBasePanel;
 import com.huawei.kunpeng.intellij.ui.panel.UninstallPanel;
@@ -58,14 +57,14 @@ public class TuningUninstallWrapDialog extends UninstallWrapDialog {
             // 关闭打开的历史报告页面
             ToolWindow toolWindow =
                     ToolWindowManager.getInstance(project).getToolWindow(TuningIDEConstant.HYPER_TUNER_TOOL_WINDOW_ID);
-            LeftTreeConfigPanel leftTreeConfigPanel = new LeftTreeConfigPanel(toolWindow, project);
-            UIUtils.changeToolWindowToDestPanel(leftTreeConfigPanel, toolWindow);
+            TuningServerConfigPanel tuningServerConfigPanel = new TuningServerConfigPanel(toolWindow, project);
+            UIUtils.changeToolWindowToDestPanel(tuningServerConfigPanel, toolWindow);
         }
         // 清除所有状态
         TuningIDEContext.setTuningIDEPluginStatus(IDEPluginStatus.IDE_STATUS_INIT);
         UserInfoContext.getInstance().clearUserInfo();
         // 清空本地 ip 缓存
-        ConfigUtils.fillIp2JsonFile(TuningIDEConstant.TOOL_NAME_TUNING, "", "","", "");
+//        ConfigUtils.fillIp2JsonFile(TuningIDEConstant.TOOL_NAME_TUNING, "", "","", "");
         // 弹框消失则将两个组件缓存置空
         checkButton = null;
         gifLabel = null;
