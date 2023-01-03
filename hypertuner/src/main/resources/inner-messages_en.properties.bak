@@ -201,7 +201,7 @@ plugins_hyper_tuner_shell_installRun=#!/bin/bash\n \
     if [[ ${pkg_name} =~ "tuner" ]];then\n \
     pkg_file="Hyper_tuner"\n \
     else\n \
-    pkg_file="Tuning_kit"\n \
+    pkg_file="Hyper_tuner"\n \
     fi\n \
     curl_url=$(echo ${pkg_url} | awk -F "/Tuning" '{print $1}')\n \
     key_url=$(echo ${key} | sed 's/%26/\\&/g')\n \
@@ -227,9 +227,7 @@ plugins_hyper_tuner_shell_installRun=#!/bin/bash\n \
     if [ $? != 0 ]; then\n \
     Logger Error "Check Env" "Network issue, please check connection.\n \
     Package download url is: ${pkg_url}\n \
-    KEYS download url is: ${key_url}\n \
-    Asc download url is: ${pkg_url}.asc\n \
-    You can download ${pkg_name}, ${pkg_name}.asc and KEYS.txt save to path $path"\n \
+    You can download ${pkg_name} save to path $path"\n \
     exit 2\n \
     fi\n \
     Logger Step "Check Env" "End to check network connection successfully."\n \
@@ -249,24 +247,7 @@ plugins_hyper_tuner_shell_installRun=#!/bin/bash\n \
     exit 4\n \
     fi\n \
     Logger Step "Download" "End to download hyper_tuner package successfully."\n \
-    Logger Step "Download" "Start to download hyper_tuner asc."\n \
-    curl "${pkg_url}.asc" -O\n \
-    if [ $? != 0 ]; then\n \
-    Logger Error "Download" "Download asc failed please check detail."\n \
-    clean\n \
-    exit 4\n \
     fi\n \
-    Logger Step "Download" "End to download asc successfully."\n \
-    Logger Step "Download" "Start to download KEYS."\n \
-    curl -s "${key_url}" -o KEYS.txt\n \
-    if [ $? != 0 ]; then\n \
-    Logger Error "Download" "Download KEYS failed please check detail."\n \
-    clean\n \
-    exit 4\n \
-    fi\n \
-    Logger Step "Download" "End to download KEYS successfully."\n \
-    fi\n \
-    signature $path/${pkg_name}.asc\n \
     # Step3.Decompression\n \
     Logger Step "Decompression" "Start to check Space required for extract hyper_tuner package."\n \
     pkg_space=2147483648\n \
@@ -584,7 +565,7 @@ plugins_hyper_tuner_shell_upgradelRun=#!/bin/bash\n \
     if [[ ${pkg_name} =~ "tuner"  ]];then\n \
     pkg_file="Hyper_tuner"\n \
     else\n \
-    pkg_file="Tuning_kit"\n \
+    pkg_file="Hyper_tuner"\n \
     fi\n \
     #pkg_file=$(echo ${pkg_name} | awk -F ".tar.gz" '{print $1}')\n \
     curl_url=$(echo ${pkg_url} | awk -F "/Tuning" '{print $1}')\n \
@@ -606,9 +587,7 @@ plugins_hyper_tuner_shell_upgradelRun=#!/bin/bash\n \
     if [ $? != 0 ]; then\n \
     Logger Error "Check Env" "Network issue, please check connection.\n \
     Package download url is: ${pkg_url}\n \
-    KEYS download url is: ${key_url}\n \
-    Asc download url is: ${pkg_url}.asc\n \
-    You can download ${pkg_name}, ${pkg_name}.asc and KEYS.txt save to path $path"\n \
+    You can download ${pkg_name} save to path $path"\n \
     exit 2\n \
     fi\n \
     Logger Step "Check Env" "End to check network connection successfully."\n \
@@ -627,24 +606,7 @@ plugins_hyper_tuner_shell_upgradelRun=#!/bin/bash\n \
     exit 4\n \
     fi\n \
     Logger Step "Download" "End to download hyper_tuner package successfully."\n \
-    Logger Step "Download" "Start to download hyper_tuner asc."\n \
-    curl "${pkg_url}.asc" -O\n \
-    if [ $? != 0 ]; then\n \
-    Logger Error "Download" "Download asc failed please check detail."\n \
-    clean\n \
-    exit 4\n \
     fi\n \
-    Logger Step "Download" "End to download asc successfully."\n \
-    Logger Step "Download" "Start to download KEYS."\n \
-    curl -s "${key_url}" -o KEYS.txt\n \
-    if [ $? != 0 ]; then\n \
-    Logger Error "Download" "Download KEYS failed please check detail."\n \
-    clean\n \
-    exit 4\n \
-    fi\n \
-    Logger Step "Download" "End to download KEYS successfully."\n \
-    fi\n \
-    signature $path/${pkg_name}.asc\n \
     # Step3.Decompression\n \
     Logger Step "Decompression" "Start to check Space required for extract hyper_tuner package."\n \
     pkg_space=2147483648\n \
@@ -698,8 +660,8 @@ plugins_ui_common_login_title=Log in to Hyper Tuner
 plugins_common_message_localFileNotExist=Local file does not exist.
 plugins_hyper_tuner_title_log_in=Login
 #未配置远端服务器主窗口显示
-plugins_hyper_tuner_lefttree_server_not_connected=<html>You have not connected to the remote server.</html>
-plugins_hyper_tuner_lefttree_server_config_now=Configure Remote Server
+plugins_hyper_tuner_lefttree_server_not_connected=You have not connected to the remote server.
+plugins_hyper_tuner_lefttree_server_config_now=Configure Server
 plugins_hyper_tuner_lefttree_server_config_again=Reconfigure Server
 plugins_hyper_tuner_lefttree_server_config_connected=connected
 plugins_hyper_tuner_config_description=Configure the remote server address for installing hyper tuner. If you have not deployed the tool on the server.
@@ -719,7 +681,7 @@ plugins_hyper_tuner_message_beforeInstallDsc=<html><body>\
   <br/>\
   3. During the use of this tool amy download and install necessary software\
   packages and verification tools, which may contain software from Huawei website:<br/>\
-  <a style="text-decoration:none;color:rgb(47,101,202);"; href="https://kunpeng-repo.obs.cn-north-4.myhuaweicloud.com/Hyper%20Tuner/Hyper%20Tuner%202.5.RC1.1/Hyper-tuner_2.5.RC1.1_linux.tar.gz">\
+  <a style="text-decoration:none;color:rgb(47,101,202);"; href="https://cmc-szver-artifactory.cmc.tools.huawei.com/artifactory/cmc-software-release/Hyper%20Tuner/Hyper%20Tuner%202/Hyper%20Tuner%202.5.T20.B010/Hyper-Tuner_2.5.T20_linux.tar.gz">\
   Installation package</a>&nbsp;&nbsp;\
   <a style="text-decoration:none;color:rgb(47,101,202);"; href="https://download.huawei.com/edownload/e/download.do?actionFlag=download&mid=SUPE_SERTOOL_VERSION&nid=TV1100000147&partNo=2005">\
   Verification tool</a>\
@@ -756,8 +718,8 @@ plugins_hyper_tuner_lefttree_config_server=Config Hyper Tuner
 #工具维护
 plugins_hyper_tuner_lefttree_maintenance=Tool Maintenance
 plugins_hyper_tuner_lefttree_install=Install
-plugins_hyper_tuner_lefttree_uninstall=Uninstall Hyper Tuner
-plugins_hyper_tuner_lefttree_upgrade=Upgrade Hyper Tuner
+plugins_hyper_tuner_lefttree_uninstall=Uninstall
+plugins_hyper_tuner_lefttree_upgrade=Upgrade
 plugins_hyper_tuner_name=Hyper Tuner
 plugins_hyper_tuner_feedback=https://bbs.huaweicloud.com/forum/forum-928-1.html
 #帮助
@@ -775,14 +737,6 @@ exit) else (\n\
 start nginx.exe\n\
 exit\n\
 )
-plugins_hyper_tuner_start_nginx_bash=#!/bin/bash\n\
-cd ''{0}''/nginx/nginx/ \n\
-chmod +x ./sbin/nginx\n\
-if [ -e /var/run/nginx.pid ]; then\n\
-./sbin/nginx -s reload\n\
-else\n\
-./sbin/nginx -c ./conf/nginx.conf\n\
-fi
 plugins_hyper_tuner_stop_nginx_bat=@echo off\n\
 {0}\n\
 cd {1}\\nginx\\nginx-1.18.0\n\
@@ -790,9 +744,6 @@ title kill nginx service\n\
 tasklist | find /i "nginx.exe" || exit\n\
 taskkill /im nginx.exe /f\n\
 exit
-plugins_hyper_tuner_stop_nginx_bash=#!/bin/bash\n\
-cd ''{0}''/nginx/nginx\n\
-./sbin/nginx -s quit
 plugins_hyper_tuner_nginx_config=events '{' \n\
   worker_connections  1024; \n\
   '}'\n\
@@ -843,23 +794,3 @@ plugins_hyper_tuner_version_server_old=<html><body>\
 plugins_hyper_tuner_version_plugin_old=The plugin version does not match the software version of the code migration tool server. \
   If you continue, unexpected errors may occur. The current server version of code migration tool is: {0}, \
   and the matching plug-in version is: {1}. It is recommended that you upgrade the plug-in to the matching version.
-plugins_hyper_tuner_lefttree_deploy_server=Deploy Hyper Tuner
-plugins_hyper_tuner_lefttree_apply_trial=Applying for a Remote Lab Trial
-plugins_hyper_tuner_lefttree_free_trial_text=<html>You can also apply for a Kunpeng remote lab for trial. A remote lab is pre-installed with the Kunpeng Porting Advisor, Kunpeng Compiler, Kunpeng Hyper Tuner, and Dynamic Binary Translator (ExaGear).</html>
-plugins_hyper_tuner_lefttree_free_trial_button=Free Trial
-plugins_hyper_tuner_lefttree_ip_address=IP Address
-plugins_hyper_tuner_lefttree_port=Port
-plugins_hyper_tuner_lefttree_notlogin_text=You are not logged in.
-plugins_hyper_tuner_lefttree_login_button=Log In
-plugins_hyper_tuner_title_config_guide=Configure Guide
-plugins_hyper_tuner_title_error_instruction=Server Exception
-plugins_hyper_tuner_about_product_server_version=Server version: 
-plugins_hyper_tuner_about_product_port_version=Tuning Analysis plugin version: 
-plugins_hyper_tuner_menu_reconfig_server=Reconfigure remote server
-plugins_hyper_tuner_titlebar_refresh_connection=Refresh Remote Server Connection
-plugins_hyper_tuner_lefttree_status=Connection Status
-plugins_hyper_tuner_lefttree_fail_info=Failure reason
-plugins_hyper_tuner_lefttree_fail_status=Failed
-plugins_hyper_tuner_lefttree_connect_server_fail=<html>Remote server connection failed.</html>
-plugins_hyper_tuner_refresh_connect_fail=Unable to connect to the server.
-plugins_hyper_tuner_refresh_version_not_match=Version mismatch.

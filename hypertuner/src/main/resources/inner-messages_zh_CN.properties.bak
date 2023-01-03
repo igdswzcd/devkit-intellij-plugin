@@ -1,10 +1,9 @@
 #安装
-plugins_hyper_tuner_install_title=Install Hyper Tuner
-plugins_hyper_tuner_install_failedLink=here
-plugins_hyper_tuner_install_failedSuffix=</a> to retry.</html>
-plugins_hyper_tuner_install_failedPrefix=<html><span>Rectify the fault based on the installation \
-    failure causes provided on the <a href="https://support.huaweicloud.com/faq-paplugin-kunpengdevps/kunpengpaplugin_10_0029.html">official website</a>.</span><br />Failed to install the tool. Click <a href="#">
-plugins_common_button_cancel=Cancel
+plugins_hyper_tuner_install_title=安装性能分析工具
+plugins_hyper_tuner_install_failedLink=此处
+plugins_hyper_tuner_install_failedSuffix=</a>重试。</html>
+plugins_hyper_tuner_install_failedPrefix=<html><span>请参考<a style="color:rgb(47, 101, 202);"href="https://support.huaweicloud.com/faq-paplugin-kunpengdevps/kunpengpaplugin_10_0029.html">官网</a>上的安装失败可能原因进行处理</span><br />工具安装失败。点击<a href="%23">
+plugins_common_button_cancel=取消
 plugins_hyper_tuner_shell_install=#!/bin/bash\n \
     function help_info(){\n \
     echo "usage bash install_tuning.sh\n \
@@ -201,7 +200,7 @@ plugins_hyper_tuner_shell_installRun=#!/bin/bash\n \
     if [[ ${pkg_name} =~ "tuner" ]];then\n \
     pkg_file="Hyper_tuner"\n \
     else\n \
-    pkg_file="Tuning_kit"\n \
+    pkg_file="Hyper_tuner"\n \
     fi\n \
     curl_url=$(echo ${pkg_url} | awk -F "/Tuning" '{print $1}')\n \
     key_url=$(echo ${key} | sed 's/%26/\\&/g')\n \
@@ -227,9 +226,7 @@ plugins_hyper_tuner_shell_installRun=#!/bin/bash\n \
     if [ $? != 0 ]; then\n \
     Logger Error "Check Env" "Network issue, please check connection.\n \
     Package download url is: ${pkg_url}\n \
-    KEYS download url is: ${key_url}\n \
-    Asc download url is: ${pkg_url}.asc\n \
-    You can download ${pkg_name}, ${pkg_name}.asc and KEYS.txt save to path $path"\n \
+    You can download ${pkg_name} save to path $path"\n \
     exit 2\n \
     fi\n \
     Logger Step "Check Env" "End to check network connection successfully."\n \
@@ -249,24 +246,7 @@ plugins_hyper_tuner_shell_installRun=#!/bin/bash\n \
     exit 4\n \
     fi\n \
     Logger Step "Download" "End to download hyper_tuner package successfully."\n \
-    Logger Step "Download" "Start to download hyper_tuner asc."\n \
-    curl "${pkg_url}.asc" -O\n \
-    if [ $? != 0 ]; then\n \
-    Logger Error "Download" "Download asc failed please check detail."\n \
-    clean\n \
-    exit 4\n \
     fi\n \
-    Logger Step "Download" "End to download asc successfully."\n \
-    Logger Step "Download" "Start to download KEYS."\n \
-    curl -s "${key_url}" -o KEYS.txt\n \
-    if [ $? != 0 ]; then\n \
-    Logger Error "Download" "Download KEYS failed please check detail."\n \
-    clean\n \
-    exit 4\n \
-    fi\n \
-    Logger Step "Download" "End to download KEYS successfully."\n \
-    fi\n \
-    signature $path/${pkg_name}.asc\n \
     # Step3.Decompression\n \
     Logger Step "Decompression" "Start to check Space required for extract hyper_tuner package."\n \
     pkg_space=2147483648\n \
@@ -314,10 +294,11 @@ plugins_hyper_tuner_shell_installRun=#!/bin/bash\n \
     Logger Step "Clean Env" "End to clean environment successfully."\n \
     Logger Step "End" "All steps finished successfully."
 #卸载
-plugins_hyper_tuner_uninstall_failedPrefix=<html>Failed to uninstall the tool. Click <a href="#">
-plugins_hyper_tuner_uninstall_failedLink=here
-plugins_hyper_tuner_uninstall_failedSuffix=</a> to retry.</html>
-plugins_hyper_tuner_uninstall_title=Uninstall Hyper Tuner
+plugins_hyper_tuner_uninstall_failedPrefix=<html>工具卸装失败。点击<a href="%23">
+plugins_hyper_tuner_uninstall_failedLink=此处
+plugins_hyper_tuner_uninstall_failedSuffix=</a>重试。</html>
+plugins_hyper_tuner_uninstall_title=卸载性能分析工具
+plugins_hyper_tuner_uninstall_success=卸载成功
 plugins_hyper_tuner_shell_uninstall=#!/bin/bash\n \
     source /etc/profile\n \
     path=$(cd `dirname $0`;pwd)\n \
@@ -384,13 +365,13 @@ plugins_hyper_tuner_shell_uninstallLog=#!/bin/bash\n \
     fi\n \
     rm -rf $0
 #升级
-plugins_hyper_tuner_upgrade_title=Upgrade Hyper Tuner
-plugins_hyper_tuner_upgrade_failedPrefix=<html><span>Rectify the fault based on the upgrade failure causes provided on the \
-  <a href="https://support.huaweicloud.com/hypertuner-faq/kunpengfaq_06_0005.html">official website</a>.\
-  </span><br /> Failed to upgrade the tool. Click <a href="#">
-plugins_hyper_tuner_upgrade_failedLink=here
-plugins_hyper_tuner_upgrade_failedSuffix=</a> to retry.</html>
-plugins_hyper_tuner_upgrade_success=The tool is successfully upgraded.
+plugins_hyper_tuner_upgrade_title=升级性能分析工具
+plugins_hyper_tuner_upgrade_failedPrefix=<html><span>请参考\
+  <a style="color:rgb(47, 101, 202);" href="https://support.huaweicloud.com/hypertuner-faq/kunpengfaq_06_0005.html">\
+  官网</a>上的升级失败可能原因进行处理</span><br />工具升级失败。点击<a href="%23">
+plugins_hyper_tuner_upgrade_failedLink=此处
+plugins_hyper_tuner_upgrade_failedSuffix=</a>重试。</html>
+plugins_hyper_tuner_upgrade_success=工具升级成功
 plugins_hyper_tuner_shell_upgradel=#!/bin/bash\n \
     function help_info(){\n \
     echo "usage bash upgrade_tuning.sh\n \
@@ -581,10 +562,10 @@ plugins_hyper_tuner_shell_upgradelRun=#!/bin/bash\n \
     pkg_url=$arm\n \
     fi\n \
     pkg_name=${pkg_url##*/}\n \
-    if [[ ${pkg_name} =~ "tuner"  ]];then\n \
+    if [[ ${pkg_name} =~ "tuner" ]];then\n \
     pkg_file="Hyper_tuner"\n \
     else\n \
-    pkg_file="Tuning_kit"\n \
+    pkg_file="Hyper_tuner"\n \
     fi\n \
     #pkg_file=$(echo ${pkg_name} | awk -F ".tar.gz" '{print $1}')\n \
     curl_url=$(echo ${pkg_url} | awk -F "/Tuning" '{print $1}')\n \
@@ -606,9 +587,7 @@ plugins_hyper_tuner_shell_upgradelRun=#!/bin/bash\n \
     if [ $? != 0 ]; then\n \
     Logger Error "Check Env" "Network issue, please check connection.\n \
     Package download url is: ${pkg_url}\n \
-    KEYS download url is: ${key_url}\n \
-    Asc download url is: ${pkg_url}.asc\n \
-    You can download ${pkg_name}, ${pkg_name}.asc and KEYS.txt save to path $path"\n \
+    You can download ${pkg_name} save to path $path"\n \
     exit 2\n \
     fi\n \
     Logger Step "Check Env" "End to check network connection successfully."\n \
@@ -627,24 +606,7 @@ plugins_hyper_tuner_shell_upgradelRun=#!/bin/bash\n \
     exit 4\n \
     fi\n \
     Logger Step "Download" "End to download hyper_tuner package successfully."\n \
-    Logger Step "Download" "Start to download hyper_tuner asc."\n \
-    curl "${pkg_url}.asc" -O\n \
-    if [ $? != 0 ]; then\n \
-    Logger Error "Download" "Download asc failed please check detail."\n \
-    clean\n \
-    exit 4\n \
     fi\n \
-    Logger Step "Download" "End to download asc successfully."\n \
-    Logger Step "Download" "Start to download KEYS."\n \
-    curl -s "${key_url}" -o KEYS.txt\n \
-    if [ $? != 0 ]; then\n \
-    Logger Error "Download" "Download KEYS failed please check detail."\n \
-    clean\n \
-    exit 4\n \
-    fi\n \
-    Logger Step "Download" "End to download KEYS successfully."\n \
-    fi\n \
-    signature $path/${pkg_name}.asc\n \
     # Step3.Decompression\n \
     Logger Step "Decompression" "Start to check Space required for extract hyper_tuner package."\n \
     pkg_space=2147483648\n \
@@ -690,81 +652,75 @@ plugins_hyper_tuner_shell_upgradelRun=#!/bin/bash\n \
     history -cw\n \
     Logger Step "Clean Env" "End to clean environment successfully."\n \
     Logger Step "End" "All steps finished successfully."
-plugins_common_message_responseError_viewDetail=Handling Suggestions
+plugins_common_message_responseError_viewDetail=修复建议
 plugins_common_message_responseError_messageSuffix=</a></html>
-plugins_tuning_upgrade_title=Upgrade Hyper Tuner
-plugins_common_keyFileExceedMaxSize=The file exceeds 10 MB. You need to manually upload the file to the server and change the file owner and permission.
-plugins_ui_common_login_title=Log in to Hyper Tuner
-plugins_common_message_localFileNotExist=Local file does not exist.
-plugins_hyper_tuner_title_log_in=Login
+plugins_hyper_tuner_title_log_in=登录
 #未配置远端服务器主窗口显示
-plugins_hyper_tuner_lefttree_server_not_connected=<html>You have not connected to the remote server.</html>
-plugins_hyper_tuner_lefttree_server_config_now=Configure Remote Server
-plugins_hyper_tuner_lefttree_server_config_again=Reconfigure Server
-plugins_hyper_tuner_lefttree_server_config_connected=connected
-plugins_hyper_tuner_config_description=Configure the remote server address for installing hyper tuner. If you have not deployed the tool on the server.
-plugins_hyper_tuner_config_closure=The current performance analysis tool is closed, please reconfigure the server
-plugins_hyper_tuner_message_beforeInstallTitle=<html><body><div><p align="left">Read the following text carefully before starting \
-  the Installation<br/></p></div></body></html>
+plugins_hyper_tuner_lefttree_server_not_connected=您还未连接远端服务器
+plugins_hyper_tuner_lefttree_server_config_now=配置服务器
+plugins_hyper_tuner_lefttree_server_config_again=重新配置
+plugins_hyper_tuner_lefttree_server_config_connected=已连接
+plugins_hyper_tuner_config_description=请配置性能分析工具的远程服务器地址，如果当前您尚未在服务器上部署工具
+plugins_hyper_tuner_config_closure=当前性能分析工具已关闭，请重新配置服务器
+#安装部署提示弹框
+plugins_hyper_tuner_message_beforeInstallTitle=<html><body><div><p align="left">在开始安装之前，请仔细阅读以下内容：<br/></p></div></body></html>
 plugins_hyper_tuner_message_beforeInstallDsc=<html><body>\
-  <div style="color:rgb({0},{1},{2});font-family:{3};font-size:{4}">\
+  <div style="color:rgb({0},{1},{2});font-family:{3};font-size:{4}"><p align="left">\
+  1. 本工具会基于您所填写的信息（IP，端口，用户名，密码等），以识别您的系统状态，实现本工具的一键部署。\
+  本工具不会将这些信息用于其他目的，也不会将其传输到服务器以外。<br/>\
+  \
+  2. 当你使用本工具时，本工具会自动下载并安装依赖的软件安装包,\
+  其中可能包含来自第三方的软件。上述来自第三方的软件均按照“如是”标准提供，我们对这些软件不承担任何责任。<br/>\
   <br/>\
-  1. This tool identifies your system status based on the information you entered(such as IP address, port number,\
-  user name, and password), and implement one-click deployment. The information you entered will not\
-  be used for other purposes or be transferred outside your server.<br/>\
-  <br/>\
-  2. During the use of this tool, you may need to downLoad and install soft dependencies,\
-  which may contain third-party software is provided "AS IS","\
-  and Huawei assumes no responsibility for risks incurred by using the software.<br/>\
-  <br/>\
-  3. During the use of this tool amy download and install necessary software\
-  packages and verification tools, which may contain software from Huawei website:<br/>\
-  <a style="text-decoration:none;color:rgb(47,101,202);"; href="https://kunpeng-repo.obs.cn-north-4.myhuaweicloud.com/Hyper%20Tuner/Hyper%20Tuner%202.5.RC1.1/Hyper-tuner_2.5.RC1.1_linux.tar.gz">\
-  Installation package</a>&nbsp;&nbsp;\
+  3. 当你使用本工具时，本工具会下载并安装必要的安装包和包校验工具，其中可能包含来自华为相关网站的下载内容。相关URL地址如下：<br/>\
+  <a style="text-decoration:none;color:rgb(47,101,202);"; href="https://cmc-szver-artifactory.cmc.tools.huawei.com/artifactory/cmc-software-release/Hyper%20Tuner/Hyper%20Tuner%202/Hyper%20Tuner%202.5.T20.B010/Hyper-Tuner_2.5.T20_linux.tar.gz">\
+  安装包下载链接</a>&nbsp;&nbsp;\
   <a style="text-decoration:none;color:rgb(47,101,202);"; href="https://download.huawei.com/edownload/e/download.do?actionFlag=download&mid=SUPE_SERTOOL_VERSION&nid=TV1100000147&partNo=2005">\
-  Verification tool</a>\
-  </p><br/><br/><br/></div></body></html>
-plugins_hyper_tuner_config_saveConfirm_title=Save Configuration
-plugins_hyper_tuner_uninstall_success=The tool is uninstalled successfully.
+  包校验工具下载链接</a>\
+  </p><br/><br/><br/><br/><br/></div></body></html>
+
+#配置远程服务器时选择证书提示
+plugins_hyper_tuner_config_saveConfirm_title=保存配置
+plugins_common_message_localFileNotExist=本地文件不存在。
 #登录提示
-plugins_hyper_tuner_login_help_url=https://www.hikunpeng.com/document/detail/en/kunpengdevps/intellij/usermanual/kunpengideintellij_10_0167.html
-plugins_hyper_tuner_login_other=You have logged in from another terminal. Please check and try again.
-plugins_hyper_tuner_login_needLoginTitle=Login timeout or not logged in.
-plugins_hyper_tuner_login_needLogin=Please login
+plugins_hyper_tuner_login_help_url=https://www.hikunpeng.com/document/detail/zh/kunpengdevps/intellij/usermanual/kunpengideintellij_10_0167.html
+plugins_hyper_tuner_login_other=您已在其他终端登录，请确认并重新登录
+plugins_hyper_tuner_login_needLoginTitle=登录超时或您还未登录
+plugins_hyper_tuner_login_needLogin=请登录
 #关于
-plugins_hyper_tuner_about_product_title=About Hyper Tuner
-plugins_hyper_tuner_about_product_info=Kunpeng Hyper Tuner Plugin
-plugins_hyper_tuner_about_product_version=Vesion V2.5.RC1.1
-plugins_hyper_tuner_about_product_release_time=Time of release: 2022.09.30
-plugins_common_message_responseError_messagePrefix=<html><span>The server does not respond. Check that the tool has been deployed on the server and the network connection is normal.</span><br /><a href="#">
-plugins_common_hyper_tuner_user_disclaimer_head=Once you select "I have read the disclaimer", you confirm that you understand and agree to the entire content of this disclaimer:
+plugins_hyper_tuner_about_product_title=关于
+plugins_hyper_tuner_about_product_info=鲲鹏性能分析工具
+plugins_hyper_tuner_about_product_version=版本 V2.5.RC1.1
+plugins_hyper_tuner_about_product_release_time=发布时间：2022.09.30
+plugins_common_message_responseError_messagePrefix=<html><span>服务器未响应，请确认服务器端工具已部署且网络连接正常。</span><br /><a href="%23">
+plugins_common_hyper_tuner_user_disclaimer_head=您一旦确认本声明，即视为您理解并同意了本声明的全部内容：
 plugins_common_hyper_tuner_user_disclaimer_content=<html><body>\
   <div style="color:rgb({0},{1},{2});font-family:{3};font-size:{4}">\
   <p align="left">\
-1. It is recommended that you use this tool in a non-production environment to prevent impact on services in the production environment. <br/><br/>\
-2. The user name and password that are not used for the authentication of the tool will not be saved in the system. <br/> <br/>\
-3. You have confirmed that you are the owner of the application or have obtained authorization from the owner. <br/> <br/>\
-4. The analysis result may contain the internal information and related data of the application you analyze. Please manage the analysis result properly. <br/> <br/>\
-5. Unless otherwise specified in laws and regulations or contracts, Huawei does not make any express or implied statement or warranty on the analysis results, nor makes any warranty or commitment on the marketability, satisfaction, non-infringement, or applicability of the analysis results for specific purposes. <br/> <br/>\
-6. Any actions you take based on the analysis records shall comply with laws and regulations, and you shall bear the risks. <br/> <br/>\
-7. No individual or organization may use the application and associated analytical records for any activity without the authorization of Huawei. Huawei is not responsible for any consequences and bears no legal liabilities. Huawei will reserve the right to pursue legal action if necessary.<br/> <br/>\
+  1. 建议您在非生产环境使用本工具，避免影响生产业务运行 <br/><br/>\
+  2. 使用过程中涉及的非工具本身验证功能所用的用户名和密码，不作他用，不会被保存在系统中<br/><br/>\
+  3. 您分析或操作前已确认您为应用程序的所有者或者已获得所有者的充足授权同意<br/><br/>\
+  4. 分析结果中可能包含您所分析应用的内部信息和相关数据，请妥善管理<br/><br/>\
+  5. 除非法律法规或双方合同另有规定，华为对分析结果不做任何明示或暗示的声明或保证，不对分析结果的适销性、满意度、非侵权性或特定用途适用性等做出任何保证或承诺<br/><br/>\
+  6. 您根据分析记录所采取的任何行为均应符合法律法规的要求，并由您自行承担风险<br><br/>\
+  7. 未经所有者授权，任何个人或组织均不得使用应用程序及相关分析记录从事任何活动。华为不对由此造成的一切后果负责，亦不承担任何法律责任。必要时，将追究其法律责任<br><br/>\
   </p>\
   </div></body></html>
-plugins_common_hyper_tuner_user_disclaimer_tips_title=Information
-plugins_common_hyper_tuner_user_disclaimer_refuse_warning=If you do not agree to the disclaimer, you will exit the performance analysis tool. Exercise caution when deciding to do so.
-plugins_hyper_tuner_lefttree_config_server=Config Hyper Tuner
+plugins_common_hyper_tuner_user_disclaimer_tips_title=提示
+plugins_common_hyper_tuner_user_disclaimer_refuse_warning=不同意免责声明将退出性能分析工具，请谨慎选择！
+plugins_hyper_tuner_lefttree_config_server=配置服务器
 #工具维护
-plugins_hyper_tuner_lefttree_maintenance=Tool Maintenance
-plugins_hyper_tuner_lefttree_install=Install
-plugins_hyper_tuner_lefttree_uninstall=Uninstall Hyper Tuner
-plugins_hyper_tuner_lefttree_upgrade=Upgrade Hyper Tuner
-plugins_hyper_tuner_name=Hyper Tuner
+plugins_hyper_tuner_lefttree_maintenance=工具维护
+plugins_hyper_tuner_lefttree_install=安装
+plugins_hyper_tuner_lefttree_uninstall=卸载
+plugins_hyper_tuner_lefttree_upgrade=升级
+plugins_hyper_tuner_name=鲲鹏性能分析工具
 plugins_hyper_tuner_feedback=https://bbs.huaweicloud.com/forum/forum-928-1.html
 #帮助
-plugins_hyper_tuner_help=https://www.hikunpeng.com/document/detail/en/kunpengdevps/intellij/usermanual/kunpengideintellij_10_0158.html
-plugins_hyper_tuner_default_port=Default port is 8086
-plugins_common_message_ipError=Enter a correct IP address.
-plugins_hyper_tuner_tip_file_upload_failed=Failed to upload the file:
+plugins_hyper_tuner_help=https://www.hikunpeng.com/document/detail/zh/kunpengdevps/intellij/usermanual/kunpengideintellij_10_0158.html
+plugins_hyper_tuner_default_port=默认端口为8086
+plugins_common_message_ipError=请输入正确格式的IP地址
+plugins_hyper_tuner_tip_file_upload_failed=文件上传失败:
 plugins_hyper_tuner_start_nginx_bat=@echo off\n\
 {0}\n\
 cd {1}\\nginx\\nginx-1.18.0\n\
@@ -775,14 +731,6 @@ exit) else (\n\
 start nginx.exe\n\
 exit\n\
 )
-plugins_hyper_tuner_start_nginx_bash=#!/bin/bash\n\
-cd ''{0}''/nginx/nginx/ \n\
-chmod +x ./sbin/nginx\n\
-if [ -e /var/run/nginx.pid ]; then\n\
-./sbin/nginx -s reload\n\
-else\n\
-./sbin/nginx -c ./conf/nginx.conf\n\
-fi
 plugins_hyper_tuner_stop_nginx_bat=@echo off\n\
 {0}\n\
 cd {1}\\nginx\\nginx-1.18.0\n\
@@ -790,9 +738,6 @@ title kill nginx service\n\
 tasklist | find /i "nginx.exe" || exit\n\
 taskkill /im nginx.exe /f\n\
 exit
-plugins_hyper_tuner_stop_nginx_bash=#!/bin/bash\n\
-cd ''{0}''/nginx/nginx\n\
-./sbin/nginx -s quit
 plugins_hyper_tuner_nginx_config=events '{' \n\
   worker_connections  1024; \n\
   '}'\n\
@@ -819,47 +764,20 @@ http '{'\n\
             proxy_set_header X-Real-IP $remote_addr;\n\
             proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n\
             proxy_pass https://{1}:{2};\n\
-       '}'\n\
-        client_header_buffer_size  1k;\n\
+       client_header_buffer_size  1k;\n\
         client_max_body_size  2048m;\n\
         large_client_header_buffers  4  2k;\n\
         client_body_buffer_size  16K;\n\
     '}' \n\
 '}'
 # webview 在线分析 导入证书
-plugins_hyper_tuner_javaperf_import_caCret=Import Ca Cert
-plugins_hyper_tuner_javaperf_import_caCret_success=After the certificate is imported successfully, restart the IDEA for \
-  the modification to take effect.
-plugins_hyper_tuner_javaperf_import_caCret_fail=Failed to import the certificate. Please try again.
+plugins_hyper_tuner_javaperf_import_caCret=导入证书
+plugins_hyper_tuner_javaperf_import_caCret_success=导入证书成功后，重启IDEA生效
+plugins_hyper_tuner_javaperf_import_caCret_fail=导入证书失败，请重试
 # 插件版本提示
-plugins_hyper_tuner_version_not_the=The Kunpeng Hyper Tuner Plugin version may not match the software version of the \
-  code migration tool server. It is recommended that you upgrade the current plug and code migration tool server to the latest version.
-plugins_hyper_tuner_version_tip=Compatibility Tips
+plugins_hyper_tuner_version_not_the_latest=插件版本与性能分析服务端的软件版本可能不匹配。建议您将当前插件与代码性能分析服务端都升级到最新版本。
+plugins_hyper_tuner_version_tip=兼容性提示
 plugins_hyper_tuner_version_server_old=<html><body>\
-  The plugin version does not match the software version of the server. \
-  The server version of the code migration tool that this plugin can match is: {0};\
-  the current server version of the code migration tool is: {1}. Please upgrade the server version to the matching version.\
-</body></html>
-plugins_hyper_tuner_version_plugin_old=The plugin version does not match the software version of the code migration tool server. \
-  If you continue, unexpected errors may occur. The current server version of code migration tool is: {0}, \
-  and the matching plug-in version is: {1}. It is recommended that you upgrade the plug-in to the matching version.
-plugins_hyper_tuner_lefttree_deploy_server=Deploy Hyper Tuner
-plugins_hyper_tuner_lefttree_apply_trial=Applying for a Remote Lab Trial
-plugins_hyper_tuner_lefttree_free_trial_text=<html>You can also apply for a Kunpeng remote lab for trial. A remote lab is pre-installed with the Kunpeng Porting Advisor, Kunpeng Compiler, Kunpeng Hyper Tuner, and Dynamic Binary Translator (ExaGear).</html>
-plugins_hyper_tuner_lefttree_free_trial_button=Free Trial
-plugins_hyper_tuner_lefttree_ip_address=IP Address
-plugins_hyper_tuner_lefttree_port=Port
-plugins_hyper_tuner_lefttree_notlogin_text=You are not logged in.
-plugins_hyper_tuner_lefttree_login_button=Log In
-plugins_hyper_tuner_title_config_guide=Configure Guide
-plugins_hyper_tuner_title_error_instruction=Server Exception
-plugins_hyper_tuner_about_product_server_version=Server version: 
-plugins_hyper_tuner_about_product_port_version=Tuning Analysis plugin version: 
-plugins_hyper_tuner_menu_reconfig_server=Reconfigure remote server
-plugins_hyper_tuner_titlebar_refresh_connection=Refresh Remote Server Connection
-plugins_hyper_tuner_lefttree_status=Connection Status
-plugins_hyper_tuner_lefttree_fail_info=Failure reason
-plugins_hyper_tuner_lefttree_fail_status=Failed
-plugins_hyper_tuner_lefttree_connect_server_fail=<html>Remote server connection failed.</html>
-plugins_hyper_tuner_refresh_connect_fail=Unable to connect to the server.
-plugins_hyper_tuner_refresh_version_not_match=Version mismatch.
+  插件版本与服务端的软件版本不匹配。本插件可匹配的性能分析工具服务端版本为：{0}；当前性能分析工具服务端版本为：{1}。请您升级服务端版本至匹配版本。\
+  </body></html>
+plugins_hyper_tuner_version_plugin_old=插件版本与性能分析工具服务端的软件版本不匹配.\u0020如果继续，可能会发生不可预知的错误。当前性能分析工具服务端版本为：{0}，所匹配的插件版本为：{1}，建议您升级插件至该匹配版本。

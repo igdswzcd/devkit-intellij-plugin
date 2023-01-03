@@ -1,5 +1,5 @@
 <idea-plugin require-restart="true">
-    <version>2.3.5</version>
+    <version>2.5.2</version>
     <!--插件id-->
     <id>com.huawei.kunpeng.hyper.tuner</id>
     <!--插件name-->
@@ -29,6 +29,10 @@
         <tr>
             <th style="height:32px; border: 1px solid gray; border-top: none; border-left: none;padding: 8px;">Plug-in Version</th>
             <th style="height:32px; border: 1px solid gray; border-top: none; border-left: none;padding: 8px;">Background Version</th>
+        </tr>
+        <tr>
+            <td style="height:32px; border: 1px solid gray; border-top: none; border-left: none;padding: 8px;">2.5.0</td>
+            <td style="height:32px; border: 1px solid gray; border-top: none; border-left: none;padding: 8px;">2.5.0</td>
         </tr>
         <tr>
             <td style="height:32px; border: 1px solid gray; border-top: none; border-left: none;padding: 8px;">2.3.5</td>
@@ -131,9 +135,29 @@
       <br>
     ]]></description>
     <change-notes><![CDATA[
-    <h2><b>2.3.5（2022-07-30）</b></h2>
+    <h2><b>2.5.0（2022-12-30）</b></h2>
      <ul type="circle">
-        <li>After the Hyper Tuner version 2.5.RC1.1 later, the basic functions of the plugin set Hyper Tuner web side remain the same.</li>
+        <li>Adds MPI cluster Top N rank charts</li>
+        <li>Adds CLI data collection & graphical analysis combined mode</li>
+        <li>Adds System Diagnosis - memory leak diagnosis</li>
+        <li>Adds 2G optimization and cleaning function in workspace</li>
+        <li>Adds Java Performance - CMS GC analysis</li>
+        <li>Expands Java Performance - hotspot analysis with support for Java lock, Cache Miss, and memory allocation dimensions</li>
+        <li>Supports Java Performance - export hotspot analysis report</li>
+        <li>Supports node-to-node MPI communication hotspot analysis</li>
+        <li>Supports hundreds of P level rank-to-rank communication heat map</li>
+        <li>Supports MPI cluster checker for initial checking</li>
+        <li>Supports HPC Analysis - basic capability of RDMA/shared storage joint analysis under MPI cluster</li>
+        <li>Adjusts HPC Analysis - UI of result query and display</li>
+        <li>Optimizes charts of MPI inefficient message communication mode</li>
+        <li>Optimizes display of OpenMP timeline</li>
+    </ul>
+    <h2><b>2.3.5（2022-06-30）</b></h2>
+     <ul type="circle">
+        <li>Fixed the issue that the memory diagnosis function is incompatible with openEuler22.03.</li>
+        <li>Fixed the issue that the CPU usage of the HPC scenario analysis function is inconsistent with the actual CPU
+         usage in some scenarios.</li>
+        <li>Fixed the MPI timeline frame freezing problem</li>
     </ul>
     <h2><b>2.3.3（2021-12-30）</b></h2>
      <ul type="circle">
@@ -179,7 +203,7 @@
                   implementationClass="com.huawei.kunpeng.hyper.tuner.webview.TuningWebFileType"/>
         <fileEditorProvider implementation="com.huawei.kunpeng.hyper.tuner.webview.WebFileProvider"/>
         <!--显示工具窗口-->
-        <toolWindow id="Hyper Tuner" secondary="true" icon="/assets/img/toolwindow.png" anchor="left"
+        <toolWindow id="Hyper Tuner" secondary="true" icon="/assets/img/toolwindow.svg" anchor="left"
                     factoryClass="com.huawei.kunpeng.hyper.tuner.toolview.sourcetuning.HyperTunerToolWindowFactory"
                     order="last"/>
     </extensions>
