@@ -1,8 +1,6 @@
 {
   "depConfig": [],
-  "depVersion": [
-    ""
-  ],
+  "depVersion": [""],
   "hostVerifier": [],
   "portConfig": [
     {
@@ -10,16 +8,10 @@
       "port": ""
     }
   ],
-  "portDisclaimer": [
-    ""
-  ],
+  "portDisclaimer": [""],
   "portEnvDoNotPrompt": [],
-  "portVersion": [
-    "2.5.RC1.1"
-  ],
-  "configVersion": [
-    "2.5.RC1.1"
-  ],
+  "portVersion": ["2.5.T30"],
+  "configVersion": ["2.5.T30"],
   "autoLoginConfig": [
     {
       "userName": "",

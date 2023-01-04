@@ -1,5 +1,5 @@
 <idea-plugin require-restart="true">
-    <version>2.3.5</version>
+    <version>2.5.0</version>
     <!--插件id-->
     <id>com.huawei.kunpeng.hyper.tuner</id>
     <!--插件name-->
@@ -29,6 +29,10 @@
         <tr>
             <th style="height:32px; border: 1px solid gray; border-top: none; border-left: none;padding: 8px;">Plug-in Version</th>
             <th style="height:32px; border: 1px solid gray; border-top: none; border-left: none;padding: 8px;">Background Version</th>
+        </tr>
+        <tr>
+            <td style="height:32px; border: 1px solid gray; border-top: none; border-left: none;padding: 8px;">2.5.0</td>
+            <td style="height:32px; border: 1px solid gray; border-top: none; border-left: none;padding: 8px;">2.5.0</td>
         </tr>
         <tr>
             <td style="height:32px; border: 1px solid gray; border-top: none; border-left: none;padding: 8px;">2.3.5</td>
@@ -131,7 +135,24 @@
       <br>
     ]]></description>
     <change-notes><![CDATA[
-    <h2><b>2.3.5（2022-07-30）</b></h2>
+    <h2><b>2.5.0（2022-12-30）</b></h2>
+     <ul type="circle">
+        <li>Added the top N rank chart of the MPI cluster.</li>
+        <li>Added the command line data collection and graphical analysis combination mode.</li>
+        <li>Added memory leak diagnosis in system diagnosis.</li>
+        <li>Added workspace cleanup function.</li>
+        <li>Added CMS GC analysis in Java Profiler.</li>
+        <li>Added hotspot analysis of Java lock, cache miss, and memory allocation samples in Java Profiler.</li>
+        <li>Added export of hotspot analysis reports in Java Profiler.</li>
+        <li>Added node-to-node MPI communication heat analysis.</li>
+        <li>Added PB-scale rank-to-rank communication heatmaps.</li>
+        <li>Added initial checks by MPI cluster checker.</li>
+        <li>Added RDMA/shared storage joint analysis in MPI clusters for HPC scenario analysis.</li>
+        <li>Modified the result query and display UI in HPC scenario analysis.</li>
+        <li>Optimized MPI inefficient communication pattern chart.</li>
+        <li>Optimized the OpenMP timeline display.</li>
+    </ul>
+    <h2><b>2.3.5（2022-06-30）</b></h2>
      <ul type="circle">
         <li>After the Hyper Tuner version 2.5.RC1.1 later, the basic functions of the plugin set Hyper Tuner web side remain the same.</li>
     </ul>
@@ -179,7 +200,7 @@
                   implementationClass="com.huawei.kunpeng.hyper.tuner.webview.TuningWebFileType"/>
         <fileEditorProvider implementation="com.huawei.kunpeng.hyper.tuner.webview.WebFileProvider"/>
         <!--显示工具窗口-->
-        <toolWindow id="Hyper Tuner" secondary="true" icon="/assets/img/toolwindow.png" anchor="left"
+        <toolWindow id="Hyper Tuner" secondary="true" icon="/assets/img/toolwindow.svg" anchor="left"
                     factoryClass="com.huawei.kunpeng.hyper.tuner.toolview.sourcetuning.HyperTunerToolWindowFactory"
                     order="last"/>
     </extensions>

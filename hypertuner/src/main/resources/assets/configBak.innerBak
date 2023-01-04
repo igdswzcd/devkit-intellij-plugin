@@ -1,0 +1,29 @@
+{
+  "depConfig": [],
+  "depVersion": [""],
+  "hostVerifier": [],
+  "portConfig": [
+    {
+      "ip": "",
+      "port": ""
+    }
+  ],
+  "portDisclaimer": [""],
+  "portEnvDoNotPrompt": [],
+  "portVersion": ["2.5.T20"],
+  "configVersion": ["2.5.T20"],
+  "autoLoginConfig": [
+    {
+      "userName": "",
+      "savePassword": false,
+      "autoLogin": false
+    }
+  ],
+  "pkg_url": [
+    {
+      "arm": "https://cmc-szver-artifactory.cmc.tools.huawei.com/artifactory/cmc-software-release/Hyper%20Tuner/Hyper%20Tuner%202/Hyper%20Tuner%202.5.T20.B010/Hyper-Tuner_2.5.T20_linux.tar.gz",
+      "x86": "https://cmc-szver-artifactory.cmc.tools.huawei.com/artifactory/cmc-software-release/Hyper%20Tuner/Hyper%20Tuner%202/Hyper%20Tuner%202.5.T20.B010/Hyper-Tuner_2.5.T20_linux.tar.gz",
+      "key": "https://download.huawei.com/edownload/e/download.do?actionFlag=download%26mid=SUPE_SERTOOL_VERSION%26nid=TV1100000147%26partNo=2005"
+    }
+  ]
+}
