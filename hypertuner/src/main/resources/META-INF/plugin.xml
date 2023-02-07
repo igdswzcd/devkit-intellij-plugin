@@ -1,5 +1,5 @@
 <idea-plugin require-restart="true">
-    <version>2.5.0</version>
+    <version>2.5.5</version>
     <!--插件id-->
     <id>com.huawei.kunpeng.hyper.tuner</id>
     <!--插件name-->
@@ -29,6 +29,10 @@
         <tr>
             <th style="height:32px; border: 1px solid gray; border-top: none; border-left: none;padding: 8px;">Plug-in Version</th>
             <th style="height:32px; border: 1px solid gray; border-top: none; border-left: none;padding: 8px;">Background Version</th>
+        </tr>
+        <tr>
+            <td style="height:32px; border: 1px solid gray; border-top: none; border-left: none;padding: 8px;">2.5.5</td>
+            <td style="height:32px; border: 1px solid gray; border-top: none; border-left: none;padding: 8px;">*</td>
         </tr>
         <tr>
             <td style="height:32px; border: 1px solid gray; border-top: none; border-left: none;padding: 8px;">2.5.0</td>
@@ -135,6 +139,10 @@
       <br>
     ]]></description>
     <change-notes><![CDATA[
+    <h2><b>2.5.5（2023-02-07）</b></h2>
+     <ul type="circle">
+        <li>Removed the server version limitation.</li>
+    </ul>
     <h2><b>2.5.0（2022-12-30）</b></h2>
      <ul type="circle">
         <li>Added the top N rank chart of the MPI cluster.</li>
