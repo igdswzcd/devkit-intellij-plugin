@@ -23,7 +23,7 @@
         </li>
       </ul>
       <h2>Version Mapping</h2>
-      This plug-in needs to run with the background service, which must be installed on Kunpeng-powered servers. The version mapping is as follows:
+      This plugin needs to run with the background service, which must be installed on Kunpeng-powered servers. The version mapping is as follows:
       <br/>
       <table cellpadding="0" cellspacing="0" style="border:1px solid gray; border-bottom: none; border-right: none;">
         <tr>
