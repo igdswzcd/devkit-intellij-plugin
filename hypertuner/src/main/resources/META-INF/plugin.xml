@@ -139,7 +139,7 @@
       <br>
     ]]></description>
     <change-notes><![CDATA[
-    <h2><b>2.5.5（2023-02-07）</b></h2>
+    <h2><b>2.5.5（2023-01-30）</b></h2>
      <ul type="circle">
         <li>Removed the server version limitation.</li>
     </ul>
