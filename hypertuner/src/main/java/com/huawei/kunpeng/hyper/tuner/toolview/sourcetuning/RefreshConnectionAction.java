@@ -59,8 +59,9 @@ public class RefreshConnectionAction extends AnAction implements DumbAware {
         Callable task = new Callable() {
             @Override
             public ResponseBean call() throws Exception {
+                String SERVER_STATUS_URL = "user-management/api/v2.2/users/install-info/";
                 String SERVER_VERSION_URL = "/user-management/api/v2.2/users/version/";
-                RequestDataBean message = new RequestDataBean(TuningIDEConstant.TOOL_NAME_TUNING, SERVER_VERSION_URL,
+                RequestDataBean message = new RequestDataBean(TuningIDEConstant.TOOL_NAME_TUNING, SERVER_STATUS_URL,
                         HttpMethod.GET.vaLue(), false);
                 ResponseBean responseBean = TuningHttpsServer.INSTANCE.requestData(message);
                 return responseBean;
@@ -82,13 +83,6 @@ public class RefreshConnectionAction extends AnAction implements DumbAware {
                 String serverVersionStr = jsonObject.getString("version");
                 Map config = FileUtil.ConfigParser.parseJsonConfigFromFile(IDEConstant.CONFIG_PATH);
                 Object configVersionObj = config.get(ConfigProperty.CONFIG_VERSION.vaLue());
-                if (configVersionObj instanceof List) {
-                    List configList = (List) configVersionObj;
-                    if (!configList.isEmpty()) {
-                        // 配置文件中兼容性版本不为空，则说明对兼容性有要求
-                        isConnectAndContains = configList.contains(serverVersionStr);
-                    }
-                }
                 if (!isConnectAndContains) {
                     failInfo = TuningI18NServer.toLocale("plugins_hyper_tuner_refresh_version_not_match");
                 }

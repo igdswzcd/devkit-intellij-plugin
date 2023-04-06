@@ -75,8 +75,9 @@ public class TuningAboutDialog extends AboutDialog {
     protected String getProductServerVersion() {
         String product_server_version = I18NServer.toLocale("plugins_hyper_tuner_about_product_server_version");
 
+        String SERVER_STATUS_URL = "user-management/api/v2.2/users/install-info/";
         String SERVER_VERSION_URL = "/user-management/api/v2.2/users/version/";
-        RequestDataBean message = new RequestDataBean(TuningIDEConstant.TOOL_NAME_TUNING, SERVER_VERSION_URL,
+        RequestDataBean message = new RequestDataBean(TuningIDEConstant.TOOL_NAME_TUNING, SERVER_STATUS_URL,
                 HttpMethod.GET.vaLue(), false);
         ResponseBean responseBean = TuningHttpsServer.INSTANCE.requestData(message);
         if (responseBean == null) {

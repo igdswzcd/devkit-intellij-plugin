@@ -221,7 +221,7 @@ public class ConfigureServerEditor extends TuningWebFileEditor {
      * @return boolean true：兼容当前服务端版本，false：不兼容当前服务端版本，并在右下角提示弹窗
      */
     protected boolean checkServiceVersionCompatible() {
-        RequestDataBean message = new RequestDataBean(TuningIDEConstant.TOOL_NAME_TUNING, SERVER_VERSION_URL,
+        RequestDataBean message = new RequestDataBean(TuningIDEConstant.TOOL_NAME_TUNING, SERVER_STATUS_URL,
                 HttpMethod.GET.vaLue(), false);
         ResponseBean responseBean = TuningHttpsServer.INSTANCE.requestData(message);
         if (responseBean == null) {
@@ -236,25 +236,6 @@ public class ConfigureServerEditor extends TuningWebFileEditor {
         Map config = FileUtil.ConfigParser.parseJsonConfigFromFile(IDEConstant.CONFIG_PATH);
         Object configVersionObj = config.get(ConfigProperty.CONFIG_VERSION.vaLue());
         String minimumVersion = "";
-        if (configVersionObj instanceof List) {
-            List configList = (List) configVersionObj;
-            if (!configList.isEmpty()) {
-                // 配置文件中兼容性版本不为空，则说明对兼容性有要求
-                isContains = configList.contains(serverVersionStr);
-                minimumVersion = configList.get(0) + "";
-            } else {
-                Logger.warn("Plugin compatibility is not configured, all background version are compatible by default");
-            }
-        }
-        Logger.info("The current plugin version compatibility is " + isContains);
-        if (!isContains) {
-            String serverOldTip = MessageFormat.format(
-                    TuningI18NServer.toLocale("plugins_hyper_tuner_version_server_old"),
-                    minimumVersion, serverVersionStr);
-            String title = TuningI18NServer.toLocale("plugins_hyper_tuner_version_tip");
-            CompatibilityDialog dialog = new CompatibilityDialog(title, serverOldTip);
-            dialog.displayPanel();
-        }
         return isContains;
     }
 }

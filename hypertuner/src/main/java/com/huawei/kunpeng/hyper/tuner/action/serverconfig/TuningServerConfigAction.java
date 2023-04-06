@@ -190,7 +190,7 @@ public class TuningServerConfigAction extends ServerConfigAction {
      */
     @Override
     protected boolean checkServiceVersionCompatible() {
-        RequestDataBean message = new RequestDataBean(TuningIDEConstant.TOOL_NAME_TUNING, SERVER_VERSION_URL,
+        RequestDataBean message = new RequestDataBean(TuningIDEConstant.TOOL_NAME_TUNING, SERVER_STATUS_URL,
                 HttpMethod.GET.vaLue(), false);
         ResponseBean responseBean = TuningHttpsServer.INSTANCE.requestData(message);
         if (responseBean == null) {
