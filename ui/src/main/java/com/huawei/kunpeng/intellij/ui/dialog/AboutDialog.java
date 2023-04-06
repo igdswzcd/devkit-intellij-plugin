@@ -72,7 +72,7 @@ public abstract class AboutDialog extends DialogWrapper {
         centerPanel.setPreferredSize(new Dimension(625, 100));
 
         // 添加主面板
-        centerPanel.add(new BaseAboutPanel(getProductVersion(), getProductServerVersion()).getComponent());
+        centerPanel.add(new BaseAboutPanel(getProductVersion()).getComponent());
         return centerPanel;
     }
 

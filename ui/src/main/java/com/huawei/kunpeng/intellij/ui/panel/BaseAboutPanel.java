@@ -60,9 +60,8 @@ public class BaseAboutPanel {
 
     private static final String PATH = "/assets/img/common/icon_info.png";
 
-    public BaseAboutPanel(String productVersion, String productServerVersion) {
+    public BaseAboutPanel(String productVersion) {
         this.productVersion = productVersion;
-        this.productServerVersion = productServerVersion;
         this.imgLabel.setIcon(new ImageIcon(AboutDialog.class.getResource(PATH)));
     }
 
