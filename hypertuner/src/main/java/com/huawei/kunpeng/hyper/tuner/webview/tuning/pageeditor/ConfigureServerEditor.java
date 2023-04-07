@@ -150,8 +150,7 @@ public class ConfigureServerEditor extends TuningWebFileEditor {
         String localPort = params.get("localPort");
         // check connection is ok
         ResponseBean response = getServiceConfigResponse(host, port);
-        if (response != null &&
-                (SUCCESS_CODE.equals(response.getCode()) || SUCCESS_CODE.equals(response.getStatus()))) {
+        if (SUCCESS_CODE.equals(response.getCode())) {
             Logger.info("connect to remote server success!");
             // update global Context
             updateIDEContext(host);
@@ -228,14 +227,8 @@ public class ConfigureServerEditor extends TuningWebFileEditor {
             Logger.warn("An error occurred while getting the server version, the response is null");
             return false;
         }
-        String responseBeanDataJsStr = responseBean.getData();
-        JSONObject jsonObject = JSON.parseObject(responseBeanDataJsStr);
-        String serverVersionStr = jsonObject.getString("version");
 
         boolean isContains = true; // 默认插件兼容所有版本插件
-        Map config = FileUtil.ConfigParser.parseJsonConfigFromFile(IDEConstant.CONFIG_PATH);
-        Object configVersionObj = config.get(ConfigProperty.CONFIG_VERSION.vaLue());
-        String minimumVersion = "";
         return isContains;
     }
 }
