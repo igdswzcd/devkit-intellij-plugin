@@ -32,11 +32,15 @@
         </tr>
         <tr>
             <td style="height:32px; border: 1px solid gray; border-top: none; border-left: none;padding: 8px;">23.0.0</td>
-            <td style="height:32px; border: 1px solid gray; border-top: none; border-left: none;padding: 8px;">*</td>
+            <td style="height:32px; border: 1px solid gray; border-top: none; border-left: none;padding: 8px;">23.0.RC1,*</td>
+        </tr>
+        <tr>
+            <td style="height:32px; border: 1px solid gray; border-top: none; border-left: none;padding: 8px;">2.5.6</td>
+            <td style="height:32px; border: 1px solid gray; border-top: none; border-left: none;padding: 8px;">2.5.0.1,*</td>
         </tr>
         <tr>
             <td style="height:32px; border: 1px solid gray; border-top: none; border-left: none;padding: 8px;">2.5.5</td>
-            <td style="height:32px; border: 1px solid gray; border-top: none; border-left: none;padding: 8px;">*</td>
+            <td style="height:32px; border: 1px solid gray; border-top: none; border-left: none;padding: 8px;">2.5.T30,*</td>
         </tr>
         <tr>
             <td style="height:32px; border: 1px solid gray; border-top: none; border-left: none;padding: 8px;">2.5.0</td>
@@ -150,6 +154,10 @@
         <li>Optimized the collection duration for hotspot function analysis.</li>
         <li>Optimized the collection duration for resource scheduling analysis.</li>
         <li>Supports MPICH applications for OpenMP/MPI analysis.</li>
+    </ul>
+    <h2><b>2.5.6（2023-02-28）</b></h2>
+     <ul type="circle">
+        <li>Fixed vulnerabilities in open source software.</li>
     </ul>
     <h2><b>2.5.5（2023-01-30）</b></h2>
      <ul type="circle">
