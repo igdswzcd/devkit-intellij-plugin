@@ -446,6 +446,12 @@ public class CommonUtil {
         return info;
     }
 
+    public static boolean readCurDnsUsageCondFromConfig() {
+        Map config = FileUtil.ConfigParser.parseJsonConfigFromFile(IDEConstant.CONFIG_PATH);
+        Map wssConfig = JsonUtil.getValueIgnoreCaseFromMap(config, ConfigProperty.WSS_CONFIG.vaLue(), Map.class);
+        return JsonUtil.getValueIgnoreCaseFromMap(wssConfig, "enabled", Boolean.class);
+    }
+
     /**
      * 设置Window-BackGround Tasks-Show是否选中
      *

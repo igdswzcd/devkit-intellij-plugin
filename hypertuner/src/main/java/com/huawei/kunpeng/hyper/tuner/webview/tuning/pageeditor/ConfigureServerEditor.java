@@ -129,7 +129,11 @@ public class ConfigureServerEditor extends TuningWebFileEditor {
                 // 仅在版本适配的情况下打开 web view 页面，允许用户使用
                 System.out.println("is compatible!!");
                 if (params.containsKey("openLogin") && Objects.equals(params.get("openLogin"), "true")) {
-                    NginxUtil.updateNginxConfig(params.get("ip"), params.get("port"), params.get("localPort"));
+                    Map config = FileUtil.ConfigParser.parseJsonConfigFromFile(IDEConstant.CONFIG_PATH);
+                    Map wssConfig = (Map) config.get(ConfigProperty.WSS_CONFIG.vaLue());
+                    boolean enabled = (boolean) wssConfig.get("enabled");
+                    String trueIp = enabled? (String) wssConfig.get("domain_name") : params.get("ip");
+                    NginxUtil.updateNginxConfig(trueIp, params.get("port"), params.get("localPort"));
                     IDELoginEditor.openPage(params.get("localPort"));
                 }
                 return SaveConfigResponse.SUCCESS.value();
@@ -148,6 +152,8 @@ public class ConfigureServerEditor extends TuningWebFileEditor {
         String host = params.get("ip");
         String port = params.get("port");
         String localPort = params.get("localPort");
+        Logger.info(params.get("enabled"));
+        boolean enabledDomainName = Boolean.parseBoolean(params.get("enabled"));
         // check connection is ok
         ResponseBean response = getServiceConfigResponse(host, port);
         if (SUCCESS_CODE.equals(response.getCode())) {
@@ -155,7 +161,7 @@ public class ConfigureServerEditor extends TuningWebFileEditor {
             // update global Context
             updateIDEContext(host);
             // save server config info into config.json
-            ConfigUtils.fillIp2JsonFile(toolName, host, port, localPort);
+            ConfigUtils.fillIp2JsonFile(toolName, host, port, localPort, enabledDomainName);
             ConfigUtils.updateUserConfig(ConfigProperty.AUTO_LOGIN_CONFIG.vaLue(), " ", false, false);
             synchronizedLeftTree();
             return true;

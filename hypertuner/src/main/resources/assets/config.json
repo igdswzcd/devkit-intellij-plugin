@@ -1,6 +1,8 @@
 {
   "depConfig": [],
-  "depVersion": [""],
+  "depVersion": [
+    ""
+  ],
   "hostVerifier": [],
   "portConfig": [
     {
@@ -8,9 +10,18 @@
       "port": ""
     }
   ],
-  "portDisclaimer": [""],
+  "wss": {
+    "domain_name": "HyperTuner",
+    "enabled": false,
+    "cert_installed": false
+  },
+  "portDisclaimer": [
+    ""
+  ],
   "portEnvDoNotPrompt": [],
-  "portVersion": ["23.0.0"],
+  "portVersion": [
+    "23.0.0"
+  ],
   "configVersion": [],
   "autoLoginConfig": [
     {

@@ -35,7 +35,6 @@ import com.huawei.kunpeng.intellij.js2java.bean.NavigatorPageBean;
 import com.huawei.kunpeng.intellij.js2java.util.JcefDevToolsUtil;
 import com.huawei.kunpeng.intellij.js2java.webview.HandlerAction;
 
-import com.esotericsoftware.minlog.Log;
 import com.google.common.base.Splitter;
 import com.google.gson.Gson;
 import com.intellij.notification.NotificationType;
@@ -424,7 +423,7 @@ public abstract class AbstractWebView {
                 } else if (indexHtml.lastIndexOf("Kunpeng Tuning Kit") > 0) {
                     indexHtml = indexHtml.replaceFirst("Kunpeng Tuning Kit", title);
                 } else {
-                    Log.info("index.html doesn't have title! ");
+                    Logger.info("index.html doesn't have title! ");
                 }
             }
             if (!Objects.isNull(response)) {

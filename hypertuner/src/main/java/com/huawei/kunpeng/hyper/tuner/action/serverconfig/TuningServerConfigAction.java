@@ -129,7 +129,11 @@ public class TuningServerConfigAction extends ServerConfigAction {
                 // 仅在版本适配的情况下打开 web view 页面，允许用户使用
                 System.out.println("is compatible!!");
                 ApplicationManager.getApplication().invokeLater(() -> {
-                    NginxUtil.updateNginxConfig(param.get("ip"), param.get("port"), param.get("localPort"));
+                    Map config = FileUtil.ConfigParser.parseJsonConfigFromFile(IDEConstant.CONFIG_PATH);
+                    Map wssConfig = (Map) config.get(ConfigProperty.WSS_CONFIG.vaLue());
+                    boolean enabled = (boolean) wssConfig.get("enabled");
+                    String trueIp = enabled? (String) wssConfig.get("domain_name") : param.get("ip");
+                    NginxUtil.updateNginxConfig(trueIp, param.get("port"), param.get("localPort"));
                     // 打开web首页
                     IDELoginEditor.openPage(param.get("localPort"));
                 });

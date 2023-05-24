@@ -21,7 +21,10 @@ import com.huawei.kunpeng.hyper.tuner.common.i18n.TuningI18NServer;
 import com.huawei.kunpeng.hyper.tuner.common.utils.NginxUtil;
 import com.huawei.kunpeng.hyper.tuner.webview.tuning.pageeditor.FreeTrialEditor;
 import com.huawei.kunpeng.hyper.tuner.webview.tuning.pageeditor.IDELoginEditor;
+import com.huawei.kunpeng.intellij.common.constant.IDEConstant;
+import com.huawei.kunpeng.intellij.common.enums.ConfigProperty;
 import com.huawei.kunpeng.intellij.common.util.CommonUtil;
+import com.huawei.kunpeng.intellij.common.util.FileUtil;
 import com.huawei.kunpeng.intellij.common.util.StringUtil;
 import com.huawei.kunpeng.intellij.ui.action.IDEPanelBaseAction;
 import com.huawei.kunpeng.intellij.ui.panel.IDEBasePanel;
@@ -62,6 +65,7 @@ public class TuningConfigSuccessPanel extends IDEBasePanel {
     // 已配置服务器的ip和端口
     private String ip;
     private String port;
+    private String extraIpDesp;
 
     /**
      * 左侧树登录面板构造函数
@@ -93,9 +97,15 @@ public class TuningConfigSuccessPanel extends IDEBasePanel {
         // 取消滚动条面板的边框
         scrollPanel.setBorder(null);
         Map<String, String> serverConfig = CommonUtil.readCurIpAndPortFromConfig();
+        boolean showDomainName = CommonUtil.readCurDnsUsageCondFromConfig();
         ip = serverConfig.get("ip");
         port = serverConfig.get("port");
-        ipInfoLabel.setText(ip);
+        if (showDomainName) {
+            extraIpDesp = " (HyperTuner)";
+        } else {
+            extraIpDesp = "";
+        }
+        ipInfoLabel.setText(ip+extraIpDesp);
         portInfoLabel.setText(port);
         ipLabel.setText(TuningI18NServer.toLocale("plugins_hyper_tuner_lefttree_ip_address"));
         portLabel.setText(TuningI18NServer.toLocale("plugins_hyper_tuner_lefttree_port"));
@@ -120,7 +130,11 @@ public class TuningConfigSuccessPanel extends IDEBasePanel {
                     return;
                 }
                 String localPort = NginxUtil.getLocalPort();
-                NginxUtil.updateNginxConfig(ip, port, localPort);
+                Map config = FileUtil.ConfigParser.parseJsonConfigFromFile(IDEConstant.CONFIG_PATH);
+                Map wssConfig = (Map) config.get(ConfigProperty.WSS_CONFIG.vaLue());
+                boolean enabled = (boolean) wssConfig.get("enabled");
+                String trueIp = enabled? (String) wssConfig.get("domain_name") : ip;
+                NginxUtil.updateNginxConfig(trueIp, port, localPort);
                 IDELoginEditor.openPage(localPort);
             }
         };

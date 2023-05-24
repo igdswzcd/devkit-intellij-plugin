@@ -63,7 +63,7 @@
       <p> You can use either of the following method to obtain the background version:</p>
       <ol>
           <li>Use the one-click deployment function of the plug-in to automatically install it.</li>
-          <li>Go to the <a href="https://www.hikunpeng.com/developer/devkit/hyper-tuner?data=web">Kunpeng Community</a> to obtain the background service installation package and installation method.</li>
+          <li>Go to the <a href="https://www.hikunpeng.com/en/developer/devkit/hyper-tuner?data=web">Kunpeng Community</a> to obtain the background service installation package and installation method.</li>
       </ol>
       <h2>Introduction to the System Profiler</h2>
       <p>The System Profiler is a system performance analysis tool for Kunpeng-powered servers. It collects performance data of processor hardware, operating system, processes or threads, and functions, analyzes system performance metrics, locates system bottlenecks and hotspot functions, and provides tuning suggestions. This tool helps you quickly locate and handle software performance problems.</p>

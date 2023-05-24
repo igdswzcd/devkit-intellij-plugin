@@ -19,9 +19,9 @@ package com.huawei.kunpeng.hyper.tuner.toolview.panel.impl;
 import com.huawei.kunpeng.intellij.common.i18n.CommonI18NServer;
 import com.huawei.kunpeng.intellij.common.util.FileUtil;
 
+import com.huawei.kunpeng.intellij.common.util.StringUtil;
 import com.intellij.openapi.ui.ValidationInfo;
 import com.intellij.openapi.wm.ToolWindow;
-import com.twelvemonkeys.lang.StringUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +52,7 @@ public class TuningFileSaveAsPanel extends FileSaveAsPanel {
      */
     public List<ValidationInfo> doValidateAll() {
         List<ValidationInfo> result = new ArrayList<>();
-        if (StringUtil.isEmpty(superFileName.getText())) {
+        if (StringUtil.stringIsEmpty(superFileName.getText())) {
             result.add(new ValidationInfo(CommonI18NServer.toLocale("common_required_tip"), superFileName));
         }
         // 符合该正则表达式的为合法文件名

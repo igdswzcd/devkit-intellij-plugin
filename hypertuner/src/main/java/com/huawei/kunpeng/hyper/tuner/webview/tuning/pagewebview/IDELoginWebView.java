@@ -61,7 +61,10 @@ public class IDELoginWebView extends WebView {
         }
         // 组装与webview交互的message
         Map<String, Object> pageParams = new HashMap<>();
-        pageParams.put("ip", ip);
+        Map wssConfig = (Map) config.get(ConfigProperty.WSS_CONFIG.vaLue());
+        boolean enabled = (boolean) wssConfig.get("enabled");
+        String trueIp = enabled? (String) wssConfig.get("domain_name") : ip;
+        pageParams.put("ip", trueIp);
         pageParams.put("port", port);
         pageParams.put("localPort", localPort);
         boolean isLightThemeInContext = IDEContext.getValueFromGlobalContext(CommonUtil.getProjectName(),

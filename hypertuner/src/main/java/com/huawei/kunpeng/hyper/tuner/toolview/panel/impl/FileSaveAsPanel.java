@@ -18,13 +18,13 @@ package com.huawei.kunpeng.hyper.tuner.toolview.panel.impl;
 
 import com.huawei.kunpeng.intellij.common.i18n.CommonI18NServer;
 import com.huawei.kunpeng.intellij.common.util.FileUtil;
+import com.huawei.kunpeng.intellij.common.util.StringUtil;
 import com.huawei.kunpeng.intellij.common.util.ValidateUtils;
 import com.huawei.kunpeng.intellij.ui.action.IDEPanelBaseAction;
 import com.huawei.kunpeng.intellij.ui.panel.IDEBasePanel;
 
 import com.intellij.openapi.ui.ValidationInfo;
 import com.intellij.openapi.wm.ToolWindow;
-import com.twelvemonkeys.lang.StringUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -117,7 +117,7 @@ public class FileSaveAsPanel extends IDEBasePanel {
      */
     public List<ValidationInfo> doValidateAll() {
         List<ValidationInfo> result = new ArrayList<>();
-        if (StringUtil.isEmpty(fileName.getText())) {
+        if (StringUtil.stringIsEmpty(fileName.getText())) {
             result.add(new ValidationInfo(CommonI18NServer.toLocale("common_required_tip"), fileName));
         }
         if (FileUtil.isContainChinese(fileName.getText()) || !FileUtil.validateFileName(fileName.getText())) {

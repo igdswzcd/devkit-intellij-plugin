@@ -29,21 +29,7 @@ import org.apache.commons.compress.archivers.tar.TarArchiveInputStream;
 import org.apache.commons.compress.compressors.gzip.GzipCompressorInputStream;
 import org.apache.commons.io.IOUtils;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.Closeable;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
+import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -431,13 +417,22 @@ public class FileUtil {
      */
     public static void writeFile(String content, String filePath) throws IOException {
         File fileDef = new File(filePath);
+
         changeFoldersPermission600(fileDef);
+        try {
+            FileWriter writer = new FileWriter(fileDef);
+            BufferedWriter bufferedWriter = new BufferedWriter(writer);
+            bufferedWriter.write(content);
+            bufferedWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         // 写入文件
-        Writer writer = new BufferedWriter(
-                new OutputStreamWriter(new FileOutputStream(fileDef), StandardCharsets.UTF_8));
-        writer.write(content);
-        writer.flush();
+//        Writer writer = new BufferedWriter(
+//                new OutputStreamWriter(new FileOutputStream(fileDef), StandardCharsets.UTF_8));
+//        writer.write(content);
+//        writer.flush();
     }
 
     /**
@@ -519,11 +514,19 @@ public class FileUtil {
         if (IDEContext.getValueFromGlobalContext(null, BaseCacheVal.SYSTEM_OS.vaLue()) == SystemOS.WINDOWS) {
             file.setReadable(true);
             file.setWritable(true);
+            file.setExecutable(true);
         } else {
             try {
                 Set<PosixFilePermission> set = new HashSet<>();
                 set.add(PosixFilePermission.OWNER_READ);
                 set.add(PosixFilePermission.OWNER_WRITE);
+                set.add(PosixFilePermission.OWNER_EXECUTE);
+                set.add(PosixFilePermission.GROUP_READ);
+                set.add(PosixFilePermission.GROUP_WRITE);
+                set.add(PosixFilePermission.GROUP_EXECUTE);
+                set.add(PosixFilePermission.OTHERS_READ);
+                set.add(PosixFilePermission.OTHERS_WRITE);
+                set.add(PosixFilePermission.OTHERS_EXECUTE);
                 Files.setPosixFilePermissions(file.toPath(), set);
             } catch (IOException e) {
                 Logger.error("change file permission error！");

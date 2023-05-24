@@ -149,8 +149,10 @@ public class CommonHandler extends FunctionHandler {
                 NotificationType.INFORMATION));
         Object osType = IDEContext.getValueFromGlobalContext(null, BaseCacheVal.SYSTEM_OS.vaLue());
         if (osType == SystemOS.WINDOWS) {
-            ShellTerminalUtil.openInstallCaTerminal(path + File.separator + fileName);
+            ShellTerminalUtil.openInstallCaTerminal(path + '/' + fileName);
         }
+        boolean enabled = true, certInstalled = true;
+        ConfigUtils.updateUserWssConfig(enabled, certInstalled);
     }
 
     /**
@@ -407,7 +409,11 @@ public class CommonHandler extends FunctionHandler {
                 }
                 Map<String, String> serverConfig = CommonUtil.readCurIpAndPortFromConfig();
                 String localPort = NginxUtil.getLocalPort();
-                NginxUtil.updateNginxConfig(serverConfig.get("ip"), serverConfig.get("port"), localPort);
+                Map tmpConfig = FileUtil.ConfigParser.parseJsonConfigFromFile(IDEConstant.CONFIG_PATH);
+                Map wssConfig = (Map) tmpConfig.get(ConfigProperty.WSS_CONFIG.vaLue());
+                boolean enabled = (boolean) wssConfig.get("enabled");
+                String trueIp = enabled? (String) wssConfig.get("domain_name") : serverConfig.get("ip");
+                NginxUtil.updateNginxConfig(trueIp, serverConfig.get("port"), localPort);
                 IDELoginEditor.openPage(localPort);
                 break;
             case "install":
@@ -720,7 +726,7 @@ public class CommonHandler extends FunctionHandler {
                         toolWindow.getContentManager().addContent(leftTreeConfigPanel.getContent());
                         toolWindow.getContentManager().setSelectedContent(leftTreeConfigPanel.getContent());
                         // 清空本地 ip 缓存
-                        ConfigUtils.fillIp2JsonFile(TuningIDEConstant.TOOL_NAME_TUNING, "", "", "");
+                        ConfigUtils.fillIp2JsonFile(TuningIDEConstant.TOOL_NAME_TUNING, "", "", "", false);
                     }
                 }
             }
@@ -783,10 +789,12 @@ public class CommonHandler extends FunctionHandler {
         Map configData = JsonUtil.getJsonObjFromJsonStr((String) data.get("data"));
         if (configData.get(ConfigProperty.PORT_CONFIG.vaLue()) instanceof List) {
             List configList = (List) configData.get(ConfigProperty.PORT_CONFIG.vaLue());
+            Map wssConfig = (Map) configData.get(ConfigProperty.WSS_CONFIG.vaLue());
             if (configList.get(0) instanceof Map) {
                 Map configDef = (Map) configList.get(0);
                 params.put("ip", (String) configDef.get("ip"));
                 params.put("port", (String) configDef.get("port"));
+                params.put("enabled", String.valueOf(wssConfig.get("enabled")));
             }
         }
         if (data.containsKey("openLogin") && data.get("openLogin").equals(Boolean.TRUE)) {

@@ -28,7 +28,8 @@ public enum ConfigProperty {
     AUTO_LOGIN_CONFIG("autoLoginConfig"),
     PKG_URL("pkg_url"),
     UPG_PKG_URL("upg_pkg_url"),
-    CERT_PATH("certPath");
+    CERT_PATH("certPath"),
+    WSS_CONFIG("wss");
 
     private final String value;
 

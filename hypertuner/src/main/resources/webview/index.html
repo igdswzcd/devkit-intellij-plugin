@@ -166,7 +166,7 @@
                reader.readAsDataURL(e.data.fileContent);
                reader.onload = function(data) {
                 window.parent.postMessage({
-                    cmd:"downloadBase64Png",
+                    cmd:"downloadFileByBlob",
                     data:{
                         fileName: e.data.fileName,
                         fileContent: data.target.result
@@ -288,7 +288,7 @@
                     left: 37.5px;
                     transform: rotate(135deg) translate(37.5px)
                 ">
-                <div class="circle" style=";
+                <div class="circle" style="
                     -webkit-animation: ball-spin-fade-loader 1s -0.625s infinite linear;
                     animation: ball-spin-fade-loader 1s -0.625s infinite linear
                 "></div>

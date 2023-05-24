@@ -41,7 +41,7 @@ public class ConfigUtils {
      * @param port     port
      * @param localPort     代理本地port
      */
-    public static void fillIp2JsonFile(String toolName, String ip, String port, String localPort) {
+    public static void fillIp2JsonFile(String toolName, String ip, String port, String localPort, boolean enabled) {
         Map config = FileUtil.ConfigParser.parseJsonConfigFromFile(IDEConstant.CONFIG_PATH);
         if (config.get(ConfigProperty.PORT_CONFIG.vaLue()) instanceof List) {
             List configList = (List) config.get(ConfigProperty.PORT_CONFIG.vaLue());
@@ -51,6 +51,8 @@ public class ConfigUtils {
                 configDef.put(BaseCacheVal.PORT.vaLue(), port);
                 configDef.put(BaseCacheVal.LOCAL_PORT.vaLue(), localPort);
             }
+            Map wssConfig = (Map) config.get(ConfigProperty.WSS_CONFIG.vaLue());
+            wssConfig.put("enabled", enabled);
             // 更新全局ip及端口
             BaseCacheDataOpt.updateGlobalIPAndPort(toolName, ip, port, localPort);
             FileUtil.ConfigParser.saveJsonConfigToFile(config.toString(), IDEConstant.CONFIG_PATH);
@@ -110,5 +112,13 @@ public class ConfigUtils {
             }
             FileUtil.ConfigParser.saveJsonConfigToFile(config.toString(), IDEConstant.CONFIG_PATH);
         }
+    }
+
+    public static void updateUserWssConfig(boolean enabled, boolean certInstalled) {
+        Map config = FileUtil.ConfigParser.parseJsonConfigFromFile(IDEConstant.CONFIG_PATH);
+        Map wssConfig = (Map) config.get(ConfigProperty.WSS_CONFIG.vaLue());
+        wssConfig.put("enabled", enabled);
+        wssConfig.put("cert_installed", certInstalled);
+        FileUtil.ConfigParser.saveJsonConfigToFile(config.toString(), IDEConstant.CONFIG_PATH);
     }
 }
